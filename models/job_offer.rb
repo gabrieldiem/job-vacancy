@@ -53,7 +53,7 @@ class JobOffer
     @salary > MINIMUM_SALARY
   end
 
-  def unspecified_salary_number
+  def self.unspecified_salary_number
     MINIMUM_SALARY
   end
 

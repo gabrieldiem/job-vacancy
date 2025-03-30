@@ -40,7 +40,6 @@ Feature: Job Offer Salary
     And the description should be "Mid level"
     And the salary should be "Not specified"
 
-    @wip @indev
   Scenario: See how to input a 'Not specified' salary in the creation form
     When I am in the creation form for a job offer
     Then I want to know how to declare an unspecified salary without guessing

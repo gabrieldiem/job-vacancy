@@ -60,8 +60,6 @@ describe JobOffer do
   end
 
   it 'The salary number to declare a salary as "Not specified" is 0' do
-    job_offer = described_class.new(title: 'a title', salary: 0)
-    expect(job_offer.is_salary_specified?).to be false
-    expect(job_offer.unspecified_salary_number).to be 0
+    expect(described_class.unspecified_salary_number).to be 0
   end
 end

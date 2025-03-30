@@ -8,6 +8,8 @@
   <%= f.text_area :description, :class => "input-block-level" %>
 	<%= errors_for(@errors, :description) %>
   <%= f.label :salary %>
+  <span class="help-block">Input '<%= JobOffer::unspecified_salary_number %>' (without the ticks)
+    for an unspecified salary</span>
   <%= f.number_field :salary, :class => "input-block-level" %>
   <%= errors_for(@errors, :salary) %>
 
