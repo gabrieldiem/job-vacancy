@@ -18,11 +18,12 @@ describe JobOfferRepository do
     repository.find(job_offer.id)
   end
 
-  it 'A JobOffer with title "Dev" and description "Remote" is saved and retrieved correctly' do
+  it 'A JobOffer with title "Dev", description "Remote" and is active is saved and retrieved correctly' do
     job_offer = JobOffer.new(title: 'Dev', description: 'Remote', updated_on: today, is_active: true, user_id: owner.id)
     found_offer = save_and_retrieve_by_id(job_offer)
     expect(found_offer.title).to eq 'Dev'
     expect(found_offer.description).to eq 'Remote'
+    expect(found_offer.is_active).to be true
   end
 
   it 'A JobOffer with title "Dev" and location "USA" is saved and retrieved correctly' do
