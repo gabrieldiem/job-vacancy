@@ -9,6 +9,19 @@ describe JobOfferRepository do
     user
   end
 
+  let(:today) do
+    Date.today
+  end
+
+  it 'A JobOffer with title "Dev" and description "Remote" is saved and retrieved correctly' do
+    today = Date.today
+    job_offer = JobOffer.new(title: 'Dev', description: 'Remote', updated_on: today, is_active: true, user_id: owner.id)
+    repository.save(job_offer)
+    found_offer = repository.find(job_offer.id)
+    expect(found_offer.title).to eq 'Dev'
+    expect(found_offer.description).to eq 'Remote'
+  end
+
   it 'a JobOffer saved and retreived should have a salary of 10000 when created with it' do
     today = Date.today
     job_offer = JobOffer.new(title: 'title', updated_on: today, salary: 10_000, is_active: true, user_id: owner.id)
