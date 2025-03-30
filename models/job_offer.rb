@@ -53,6 +53,10 @@ class JobOffer
     @salary > MINIMUM_SALARY
   end
 
+  def unspecified_salary_number
+    MINIMUM_SALARY
+  end
+
   private
 
   def is_salary_valid?
