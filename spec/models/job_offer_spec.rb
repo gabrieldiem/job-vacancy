@@ -14,6 +14,12 @@ describe JobOffer do
       end
     end
 
+    it 'should be invalid when salary is -1' do
+      check_validation(:salary, "Salary can't be negative. Input '0' (without the ticks) for an unspecified salary") do
+        described_class.new(title: 'a title', salary: -1)
+      end
+    end
+
     it 'should be valid when title and salary are not blank' do
       job_offer = described_class.new(title: 'a title', salary: 10)
       expect(job_offer).to be_valid

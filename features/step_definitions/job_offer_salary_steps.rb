@@ -1,4 +1,5 @@
 SALARY_FIELD_BLANK_ERROR_MESSAGE = "can't be blank. Input '0' (without the ticks) for an unspecified salary".freeze
+SALARY_FIELD_NEGATIVE_ERROR_MESSAGE = "can't be negative. Input '0' (without the ticks) for an unspecified salary".freeze
 
 When('I create a new offer with title {string}, location {string}, description {string} and salary {string}') do
 |title, location, description, salary|
@@ -46,4 +47,8 @@ Then('I should see a title {string} in the offers list with location {string}, d
   page.should have_content(location)
   page.should have_content(description)
   page.should have_content(salary)
+end
+
+Then('I should see an offer error message telling me the salary cannot be negative or to input zero for unspecified salary') do
+  page.should have_content(SALARY_FIELD_NEGATIVE_ERROR_MESSAGE)
 end
