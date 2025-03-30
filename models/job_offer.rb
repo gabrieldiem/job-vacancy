@@ -9,7 +9,6 @@ class JobOffer
   MINIMUM_SALARY = 0
   SALARY_CANT_BE_BLANK_MESSAGE = "can't be blank".freeze
   SALARY_CANT_BE_NEGATIVE_MESSAGE = "can't be negative".freeze
-  INPUT_FOR_UNSPECIFIED_SALARY_MESSAGE = "Input '#{MINIMUM_SALARY}' (without the ticks) for an unspecified salary".freeze
 
   validates :title, presence: true
   validate :is_salary_valid?
@@ -60,15 +59,9 @@ class JobOffer
   private
 
   def is_salary_valid?
-    if @salary.blank? || @salary.nil?
-      message = "#{SALARY_CANT_BE_BLANK_MESSAGE}. #{INPUT_FOR_UNSPECIFIED_SALARY_MESSAGE}"
-      errors.add(:salary, message)
-    end
+    errors.add(:salary, SALARY_CANT_BE_BLANK_MESSAGE) if @salary.blank? || @salary.nil?
 
-    if @salary.to_i < MINIMUM_SALARY
-      message = "#{SALARY_CANT_BE_NEGATIVE_MESSAGE}. #{INPUT_FOR_UNSPECIFIED_SALARY_MESSAGE}"
-      errors.add(:salary, message)
-    end
+    errors.add(:salary, SALARY_CANT_BE_NEGATIVE_MESSAGE) if @salary.to_i < MINIMUM_SALARY
   end
 
   def parse_input_salary

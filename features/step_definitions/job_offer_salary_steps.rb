@@ -1,5 +1,5 @@
-SALARY_FIELD_BLANK_ERROR_MESSAGE = "can't be blank. Input '0' (without the ticks) for an unspecified salary".freeze
-SALARY_FIELD_NEGATIVE_ERROR_MESSAGE = "can't be negative. Input '0' (without the ticks) for an unspecified salary".freeze
+SALARY_FIELD_BLANK_ERROR_MESSAGE = "can't be blank".freeze
+SALARY_FIELD_NEGATIVE_ERROR_MESSAGE = "can't be negative".freeze
 INPUT_FOR_UNSPECIFIED_SALARY = "Input '0' (without the ticks) for an unspecified salary".freeze
 
 When('I create a new offer with title {string}, location {string}, description {string} and salary {string}') do

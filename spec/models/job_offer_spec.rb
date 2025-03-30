@@ -9,13 +9,13 @@ describe JobOffer do
     end
 
     it 'should be invalid when salary is blank' do
-      check_validation(:salary, "Salary can't be blank. Input '0' (without the ticks) for an unspecified salary") do
+      check_validation(:salary, "Salary can't be blank") do
         described_class.new(title: 'a title')
       end
     end
 
     it 'should be invalid when salary is -1' do
-      check_validation(:salary, "Salary can't be negative. Input '0' (without the ticks) for an unspecified salary") do
+      check_validation(:salary, "Salary can't be negative") do
         described_class.new(title: 'a title', salary: -1)
       end
     end
