@@ -12,7 +12,6 @@ Feature: Job Offer Salary
     And the description should be "New grads"
     And the salary should be "10000"
 
-  @wip @indev
   Scenario: Cannot create new offer without salary
     When I create a new offer with title "Golang Dev", location "Korea", description "New grads" and salary ""
     Then I should see an offer error message asking to fill in the salary
