@@ -31,3 +31,11 @@ Feature: Job Offer Salary
     Then I should see a offer created confirmation message
     Then I activate the job offer
     And I should see a title "Java Dev" in the offers list with location "Palermo", description "Mid level" and salary "Not specified"
+
+  Scenario: See 'Not specified' salary in my offers when created with zero salary
+    When I create a new offer with title "Java Dev", location "Palermo", description "Mid level" and salary "0"
+    Then I should see a offer created confirmation message
+    And I should see a title "Java Dev" in my offers list
+    And the location should be "Palermo"
+    And the description should be "Mid level"
+    And the salary should be "Not specified"
