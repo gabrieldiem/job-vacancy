@@ -61,3 +61,15 @@ end
 Then('I want to know how to declare an unspecified salary without guessing') do
   page.should have_content(INPUT_FOR_UNSPECIFIED_SALARY)
 end
+
+When('I change the salary to {string}') do |salary|
+  click_link('Edit')
+  fill_in('job_offer_form[salary]', with: salary)
+  click_button('Save')
+end
+
+When('I change the description to {string}') do |description|
+  click_link('Edit')
+  fill_in('job_offer_form[description]', with: description)
+  click_button('Save')
+end

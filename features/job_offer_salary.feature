@@ -43,3 +43,13 @@ Feature: Job Offer Salary
   Scenario: See how to input a 'Not specified' salary in the creation form
     When I am in the creation form for a job offer
     Then I want to know how to declare an unspecified salary without guessing
+
+  Scenario: Create new offer with salary
+    Given I create a new offer with title "Java Dev", location "Palermo", description "Mid level" and salary "0"
+    When I change the salary to "5000"
+    And I change the description to "Senior level"
+    Then I should see a offer updated confirmation message
+    And I should see a title "Java Dev" in my offers list
+    And the location should be "Palermo"
+    And the description should be "Senior level"
+    And the salary should be "5000"
