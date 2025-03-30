@@ -9,12 +9,12 @@ describe JobOfferRepository do
     user
   end
 
-  xit 'a JobOffer saved and retreived should have a salary of 10000 when created with it' do
+  it 'a JobOffer saved and retreived should have a salary of 10000 when created with it' do
     today = Date.today
     job_offer = JobOffer.new(title: 'title', updated_on: today, salary: 10_000, is_active: true, user_id: owner.id)
     repository.save(job_offer)
     found_offer = repository.find(job_offer.id)
-    expect(found_offer.salary).to eq job_offer.salary
+    expect(found_offer.salary).to eq 10_000
   end
 
   describe 'deactive_old_offers' do
