@@ -44,7 +44,7 @@ Feature: Job Offer Salary
     When I am in the creation form for a job offer
     Then I want to know how to declare an unspecified salary without guessing
 
-  Scenario: Create new offer with salary
+  Scenario: Update salary offer information in 'Not specified' case
     Given I create a new offer with title "Java Dev", location "Palermo", description "Mid level" and salary "0"
     When I change the salary to "5000"
     And I change the description to "Senior level"
