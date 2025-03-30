@@ -18,4 +18,9 @@ describe JobOffer do
     job_offer = described_class.new(title: 'a title', salary: 10_000)
     expect(job_offer.salary).to eq 10_000
   end
+
+  it 'should have a salary of 200 when created with it' do
+    job_offer = described_class.new(title: 'a title', salary: 200)
+    expect(job_offer.salary).to eq 200
+  end
 end

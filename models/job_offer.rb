@@ -5,7 +5,10 @@ class JobOffer
                 :location, :description, :salary, :is_active,
                 :updated_on, :created_on
 
+  SALARY_NOT_SPECIFIED = 0
+
   validates :title, presence: true
+  validates :salary, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
 
   def initialize(data = {})
     @id = data[:id]
@@ -16,7 +19,7 @@ class JobOffer
     @updated_on = data[:updated_on]
     @created_on = data[:created_on]
     @user_id = data[:user_id]
-    @salary = 10_000
+    @salary = data[:salary].nil? ? SALARY_NOT_SPECIFIED : data[:salary].to_i
     validate!
   end
 
