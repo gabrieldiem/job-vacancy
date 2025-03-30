@@ -1,4 +1,4 @@
-SALARY_FIELD_REQUIRED_ERROR_MESSAGE = "can't be blank".freeze
+SALARY_FIELD_BLANK_ERROR_MESSAGE = "can't be blank. Input '0' (without the ticks) for an unspecified salary".freeze
 
 When('I create a new offer with title {string}, location {string}, description {string} and salary {string}') do
 |title, location, description, salary|
@@ -30,8 +30,8 @@ And('the salary should be {string}') do |salary|
   page.should have_content(salary)
 end
 
-Then('I should see an offer error message asking to fill in the salary') do
-  page.should have_content(SALARY_FIELD_REQUIRED_ERROR_MESSAGE)
+Then('I should see an offer error message asking to fill in the salary or input zero for unspecified salary') do
+  page.should have_content(SALARY_FIELD_BLANK_ERROR_MESSAGE)
 end
 
 Then('I activate the job offer') do
