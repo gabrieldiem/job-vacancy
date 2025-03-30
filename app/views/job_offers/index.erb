@@ -3,7 +3,8 @@
 	<tr>
 		<th>Title</th>
 		<th>Location</th>
-		<th>Description</th>
+    <th>Description</th>
+    <th>Salary</th>
 		<th>Actions</th>
 	</tr>
 	<% @offers.each do | offer| %>
@@ -17,8 +18,11 @@
 		</td>
 		<td>
 			<%= offer.description %>
-		</td>		
-		<td>
+		</td>
+    <td>
+      <%= offer.salary %>
+    </td>
+    <td>
 			<%= link_to 'Apply', url_for(:job_offers, :apply, :offer_id => offer.id), :class => "btn btn-primary" %>
 		</td>		
 	</tr>

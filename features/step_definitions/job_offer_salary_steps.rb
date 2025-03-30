@@ -33,3 +33,17 @@ end
 Then('I should see an offer error message asking to fill in the salary') do
   page.should have_content(SALARY_FIELD_REQUIRED_ERROR_MESSAGE)
 end
+
+Then('I activate the job offer') do
+  visit '/job_offers/my'
+  click_button('Activate')
+end
+
+Then('I should see a title {string} in the offers list with location {string}, description {string} and salary {string}') do
+|title, location, description, salary|
+  visit '/job_offers'
+  page.should have_content(title)
+  page.should have_content(location)
+  page.should have_content(description)
+  page.should have_content(salary)
+end

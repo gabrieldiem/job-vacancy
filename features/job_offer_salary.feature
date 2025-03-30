@@ -15,3 +15,9 @@ Feature: Job Offer Salary
   Scenario: Cannot create new offer without salary
     When I create a new offer with title "Golang Dev", location "Korea", description "New grads" and salary ""
     Then I should see an offer error message asking to fill in the salary
+    
+  Scenario: See newly created offer with salary in the offers list
+    When I create a new offer with title "Golang Dev", location "Korea", description "New grads" and salary "10000"
+    Then I should see a offer created confirmation message
+    Then I activate the job offer
+    And I should see a title "Golang Dev" in the offers list with location "Korea", description "New grads" and salary "10000"
