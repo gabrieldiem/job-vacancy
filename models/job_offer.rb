@@ -49,6 +49,10 @@ class JobOffer
     (Date.today - updated_on) >= 30
   end
 
+  def is_salary_specified?
+    @salary > MINIMUM_SALARY
+  end
+
   private
 
   def is_salary_valid?

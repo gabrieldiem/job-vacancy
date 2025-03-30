@@ -39,6 +39,7 @@ describe JobOffer do
   it 'should have a salary of 10000 when created with it' do
     job_offer = described_class.new(title: 'a title', salary: 10_000)
     expect(job_offer.salary).to eq 10_000
+    expect(job_offer.is_salary_specified?).to be true
   end
 
   it 'should have a salary of 200 when created with it' do
@@ -51,5 +52,10 @@ describe JobOffer do
     expect(job_offer.salary).to eq 300
     expect(job_offer.description).to eq 'Remote'
     expect(job_offer.location).to eq 'Korea'
+  end
+
+  it 'should have a "Not specified" salary when created with 0 salary' do
+    job_offer = described_class.new(title: 'a title', salary: 0)
+    expect(job_offer.is_salary_specified?).to be false
   end
 end

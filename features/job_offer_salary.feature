@@ -25,3 +25,10 @@ Feature: Job Offer Salary
   Scenario: Cannot create new offer with negative salary
     When I create a new offer with title "Golang Dev", location "Korea", description "New grads" and salary "-100"
     Then I should see an offer error message telling me the salary cannot be negative or to input zero for unspecified salary
+
+    @wip @indev
+  Scenario: See 'Not specified' salary in offers list when created with zero salary
+    When I create a new offer with title "Java Dev", location "Palermo", description "Mid level" and salary "0"
+    Then I should see a offer created confirmation message
+    Then I activate the job offer
+    And I should see a title "Java Dev" in the offers list with location "Palermo", description "Mid level" and salary "Not specified"
