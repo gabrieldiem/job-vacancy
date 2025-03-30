@@ -1,5 +1,6 @@
 class JobOffer
   include ActiveModel::Validations
+  include ActiveModel::Validations::Callbacks
 
   attr_accessor :id, :user, :user_id, :title,
                 :location, :description, :salary, :is_active,
@@ -8,9 +9,9 @@ class JobOffer
   MINIMUM_SALARY = 0
 
   validates :title, presence: true
-  validates :salary, presence: true, unless: lambda {
-                                               salary.blank? || salary.nil? ? false : salary.to_i >= MINIMUM_SALARY
-                                             }
+  validates :salary, presence: true, unless: :is_input_salary_valid?
+
+  after_validation :parse_input_salary
 
   def initialize(data = {})
     @id = data[:id]
@@ -43,5 +44,15 @@ class JobOffer
 
   def old_offer?
     (Date.today - updated_on) >= 30
+  end
+
+  private
+
+  def is_input_salary_valid?
+    @salary.blank? || @salary.nil? ? false : @salary.to_i >= MINIMUM_SALARY
+  end
+
+  def parse_input_salary
+    @salary = @salary.to_i
   end
 end
