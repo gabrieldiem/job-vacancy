@@ -4,23 +4,29 @@ describe JobOffer do
   describe 'valid?' do
     it 'should be invalid when title is blank' do
       check_validation(:title, "Title can't be blank") do
-        described_class.new(location: 'a location')
+        described_class.new(location: 'a location', salary: 10)
       end
     end
 
-    it 'should be valid when title is not blank' do
-      job_offer = described_class.new(title: 'a title')
+    it 'should be invalid when salary is blank' do
+      check_validation(:salary, "Salary can't be blank") do
+        described_class.new(title: 'a title')
+      end
+    end
+
+    it 'should be valid when title and salary are not blank' do
+      job_offer = described_class.new(title: 'a title', salary: 10)
       expect(job_offer).to be_valid
     end
   end
 
   it 'should have a description of "Remote" when created with it' do
-    job_offer = described_class.new(title: 'a title', description: 'Remote')
+    job_offer = described_class.new(title: 'a title', description: 'Remote', salary: 0)
     expect(job_offer.description).to eq 'Remote'
   end
 
   it 'should have a location of "Korea" when created with it' do
-    job_offer = described_class.new(title: 'a title', location: 'Korea')
+    job_offer = described_class.new(title: 'a title', location: 'Korea', salary: 0)
     expect(job_offer.location).to eq 'Korea'
   end
 

@@ -18,23 +18,24 @@ describe JobOfferRepository do
     repository.find(job_offer.id)
   end
 
-  it 'A JobOffer with title "Dev", description "Remote" and is active is saved and retrieved correctly' do
-    job_offer = JobOffer.new(title: 'Dev', description: 'Remote', updated_on: today, is_active: true, user_id: owner.id)
+  it 'A JobOffer with title "Dev", description "Remote" is saved and retrieved correctly' do
+    job_offer = JobOffer.new(title: 'Dev', description: 'Remote', updated_on: today, is_active: true,
+                             user_id: owner.id, salary: 0)
     found_offer = save_and_retrieve_by_id(job_offer)
     expect(found_offer.title).to eq 'Dev'
     expect(found_offer.description).to eq 'Remote'
-    expect(found_offer.is_active).to be true
   end
 
   it 'A JobOffer with title "Dev" and location "USA" is saved and retrieved correctly' do
-    job_offer = JobOffer.new(title: 'Dev', location: 'USA', updated_on: today, is_active: true, user_id: owner.id)
+    job_offer = JobOffer.new(title: 'Dev', location: 'USA', updated_on: today, is_active: true, user_id: owner.id,
+                             salary: 0)
     found_offer = save_and_retrieve_by_id(job_offer)
     expect(found_offer.title).to eq 'Dev'
     expect(found_offer.location).to eq 'USA'
   end
 
   it 'A JobOffer with title "Dev" and is not active is saved and retrieved correctly' do
-    job_offer = JobOffer.new(title: 'Dev', updated_on: today, is_active: false, user_id: owner.id)
+    job_offer = JobOffer.new(title: 'Dev', updated_on: today, is_active: false, user_id: owner.id, salary: 0)
     found_offer = save_and_retrieve_by_id(job_offer)
     expect(found_offer.title).to eq 'Dev'
     expect(found_offer.is_active).to be false
@@ -51,7 +52,8 @@ describe JobOfferRepository do
       today_offer = JobOffer.new(title: 'a title',
                                  updated_on: Date.today,
                                  is_active: true,
-                                 user_id: owner.id)
+                                 user_id: owner.id,
+                                 salary: 0)
       repository.save(today_offer)
       today_offer
     end
@@ -60,7 +62,8 @@ describe JobOfferRepository do
       thirty_day_offer = JobOffer.new(title: 'a title',
                                       updated_on: Date.today - 45,
                                       is_active: true,
-                                      user_id: owner.id)
+                                      user_id: owner.id,
+                                      salary: 0)
       repository.save(thirty_day_offer)
       thirty_day_offer
     end

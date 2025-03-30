@@ -1,3 +1,5 @@
+SALARY_FIELD_REQUIRED_ERROR_MESSAGE = "can't be blank".freeze
+
 When('I create a new offer with title {string}, location {string}, description {string} and salary {string}') do
 |title, location, description, salary|
   visit '/job_offers/new'
@@ -26,4 +28,8 @@ end
 And('the salary should be {string}') do |salary|
   visit '/job_offers/my'
   page.should have_content(salary)
+end
+
+Then('I should see an offer error message asking to fill in the salary') do
+  page.should have_content(SALARY_FIELD_REQUIRED_ERROR_MESSAGE)
 end
