@@ -32,6 +32,13 @@ describe JobOfferRepository do
     expect(found_offer.location).to eq 'USA'
   end
 
+  it 'A JobOffer with title "Dev" and is not active is saved and retrieved correctly' do
+    job_offer = JobOffer.new(title: 'Dev', updated_on: today, is_active: false, user_id: owner.id)
+    found_offer = save_and_retrieve_by_id(job_offer)
+    expect(found_offer.title).to eq 'Dev'
+    expect(found_offer.is_active).to be false
+  end
+
   it 'A JobOffer saved and retreived should have a salary of 10000 when created with it' do
     job_offer = JobOffer.new(title: 'title', updated_on: today, salary: 10_000, is_active: true, user_id: owner.id)
     found_offer = save_and_retrieve_by_id(job_offer)
