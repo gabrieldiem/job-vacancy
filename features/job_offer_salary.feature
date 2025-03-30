@@ -4,7 +4,6 @@ Feature: Job Offer Salary
   Background:
     Given I am logged in as job offerer
 
-  @wip @indev
   Scenario: Create new offer with salary
     When I create a new offer with title "Golang Dev", location "Korea", description "New grads" and salary "10000"
     Then I should see a offer created confirmation message
