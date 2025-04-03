@@ -26,3 +26,10 @@ job_build_and_test:
       - reports/
     reports:
       junit: reports/spec/rspec.xml
+
+job_deploy_staging:
+  stage: deploy_staging
+  script:
+    - curl $DEPLOY_STAGING_URL\?$DEPLOY_STAGING_PARAMS
+  only:
+    - render
