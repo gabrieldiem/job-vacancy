@@ -33,4 +33,4 @@ job_deploy_staging:
   script:
     - curl $DEPLOY_STAGING_URL/?$DEPLOY_STAGING_PARAMS
   only:
-    - render
+    - develop
