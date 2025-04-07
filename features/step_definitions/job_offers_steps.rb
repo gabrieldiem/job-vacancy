@@ -19,6 +19,7 @@ end
 When(/^I create a new offer with "(.*?)" as the title$/) do |title|
   visit '/job_offers/new'
   fill_in('job_offer_form[title]', with: title)
+  fill_in('job_offer_form[salary]', with: 0)
   click_button('Create')
 end
 
@@ -57,6 +58,7 @@ Given(/^I have "(.*?)" offer in my offers list$/) do |offer_title|
 
   visit '/job_offers/new'
   fill_in('job_offer_form[title]', with: offer_title)
+  fill_in('job_offer_form[salary]', with: 0)
   click_button('Create')
 end
 

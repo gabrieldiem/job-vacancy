@@ -1,0 +1,55 @@
+Feature: Job Offer Salary
+  As a job offerer
+
+  Background:
+    Given I am logged in as job offerer
+
+  Scenario: Create new offer with salary
+    When I create a new offer with title "Golang Dev", location "Korea", description "New grads" and salary "10000"
+    Then I should see a offer created confirmation message
+    And I should see a title "Golang Dev" in my offers list
+    And the location should be "Korea"
+    And the description should be "New grads"
+    And the salary should be "10000"
+
+  Scenario: Cannot create new offer without salary
+    When I create a new offer with title "Golang Dev", location "Korea", description "New grads" and salary ""
+    Then I should see an offer error message asking to fill in the salary or input zero for unspecified salary
+
+  Scenario: See newly created offer with salary in the offers list
+    When I create a new offer with title "Golang Dev", location "Korea", description "New grads" and salary "10000"
+    Then I should see a offer created confirmation message
+    Then I activate the job offer
+    And I should see a title "Golang Dev" in the offers list with location "Korea", description "New grads" and salary "10000"
+
+  Scenario: Cannot create new offer with negative salary
+    When I create a new offer with title "Golang Dev", location "Korea", description "New grads" and salary "-100"
+    Then I should see an offer error message telling me the salary cannot be negative or to input zero for unspecified salary
+
+  Scenario: See 'Not specified' salary in offers list when created with zero salary
+    When I create a new offer with title "Java Dev", location "Palermo", description "Mid level" and salary "0"
+    Then I should see a offer created confirmation message
+    Then I activate the job offer
+    And I should see a title "Java Dev" in the offers list with location "Palermo", description "Mid level" and salary "Not specified"
+
+  Scenario: See 'Not specified' salary in my offers when created with zero salary
+    When I create a new offer with title "Java Dev", location "Palermo", description "Mid level" and salary "0"
+    Then I should see a offer created confirmation message
+    And I should see a title "Java Dev" in my offers list
+    And the location should be "Palermo"
+    And the description should be "Mid level"
+    And the salary should be "Not specified"
+
+  Scenario: See how to input a 'Not specified' salary in the creation form
+    When I am in the creation form for a job offer
+    Then I want to know how to declare an unspecified salary without guessing
+
+  Scenario: Update salary offer information in 'Not specified' case
+    Given I create a new offer with title "Java Dev", location "Palermo", description "Mid level" and salary "0"
+    When I change the salary to "5000"
+    And I change the description to "Senior level"
+    Then I should see a offer updated confirmation message
+    And I should see a title "Java Dev" in my offers list
+    And the location should be "Palermo"
+    And the description should be "Senior level"
+    And the salary should be "5000"
