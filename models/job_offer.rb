@@ -1,3 +1,5 @@
+require 'debug'
+
 class JobOffer
   include ActiveModel::Validations
   include ActiveModel::Validations::Callbacks
@@ -45,7 +47,11 @@ class JobOffer
   end
 
   def old_offer?
-    (Date.today - updated_on) >= 30
+    if @updated_on.nil?
+      Date.today - @created_on >= 30
+    else
+      (Date.today - @updated_on) >= 30
+    end
   end
 
   def is_salary_specified?
