@@ -47,11 +47,7 @@ class JobOffer
   end
 
   def old_offer?
-    if @updated_on.nil?
-      Date.today - @created_on >= 30
-    else
-      (Date.today - @updated_on) >= 30
-    end
+    (Date.today - @updated_on) >= 30
   end
 
   def is_salary_specified?
