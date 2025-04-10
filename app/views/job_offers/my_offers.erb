@@ -3,7 +3,8 @@
 	<tr>
 		<th>Title</th>
 		<th>Location</th>
-		<th>Description</th>
+    <th>Description</th>
+    <th>Salary</th>
 		<th>Is active</th>
 		<th>Actions</th>
 	</tr>
@@ -18,8 +19,11 @@
 		</td>
 		<td>
 			<%= offer.description %>
-		</td>		
-		<td>
+		</td>
+    <td>
+      <%= print_salary(offer) %>
+    </td>
+    <td>
 			<%= offer.is_active %>
 		</td>		
 

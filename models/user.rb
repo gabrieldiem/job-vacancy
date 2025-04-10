@@ -7,7 +7,7 @@ class User
 
   validates :name, :crypted_password, presence: true
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX,
-                                              message: 'invalid email' }
+                                              message: 'invalid' }
 
   def self.create(name, email, password)
     data = {}

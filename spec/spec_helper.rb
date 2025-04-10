@@ -1,20 +1,23 @@
-require 'simplecov'
-SimpleCov.start do
-  root(File.join(File.dirname(__FILE__), '..'))
-  coverage_dir 'reports/coverage'
-  add_filter '/spec/'
-  add_filter '/features/'
-  add_filter '/admin/'
-  add_filter '/db/'
-  add_filter '/config/'
-  add_group 'Models', 'models'
-  add_group 'Controllers', 'app/controllers'
-  add_group 'Helpers', 'app/helpers'
-  add_group 'Repositories', 'app/repositories'
-  add_group 'Mailers', 'app/mailers'
-  add_group 'Security', 'app/security'
-  add_group 'Forms', 'app/forms'
-  add_group 'Lib', 'lib'
+unless ARGV.include?('--dry-run')
+  require 'simplecov'
+  # SimpleCov.minimum_coverage 75
+  SimpleCov.start do
+    root(File.join(File.dirname(__FILE__), '..'))
+    coverage_dir 'reports/coverage'
+    add_filter '/spec/'
+    add_filter '/features/'
+    add_filter '/admin/'
+    add_filter '/db/'
+    add_filter '/config/'
+    add_group 'Models', 'models'
+    add_group 'Controllers', 'app/controllers'
+    add_group 'Helpers', 'app/helpers'
+    add_group 'Repositories', 'app/repositories'
+    add_group 'Mailers', 'app/mailers'
+    add_group 'Security', 'app/security'
+    add_group 'Forms', 'app/forms'
+    add_group 'Lib', 'lib'
+  end
 end
 
 RACK_ENV = 'test'.freeze unless defined?(RACK_ENV)

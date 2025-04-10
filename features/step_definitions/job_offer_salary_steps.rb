@@ -1,0 +1,75 @@
+SALARY_FIELD_BLANK_ERROR_MESSAGE = "can't be blank".freeze
+SALARY_FIELD_NEGATIVE_ERROR_MESSAGE = "can't be negative".freeze
+INPUT_FOR_UNSPECIFIED_SALARY = "Input '0' (without the ticks) for an unspecified salary".freeze
+
+When('I create a new offer with title {string}, location {string}, description {string} and salary {string}') do
+|title, location, description, salary|
+  visit '/job_offers/new'
+  fill_in('job_offer_form[title]', with: title)
+  fill_in('job_offer_form[location]', with: location)
+  fill_in('job_offer_form[description]', with: description)
+  fill_in('job_offer_form[salary]', with: salary)
+  click_button('Create')
+end
+
+Then('I should see a title {string} in my offers list') do |title|
+  visit '/job_offers/my'
+  page.should have_content(title)
+end
+
+And('the location should be {string}') do |location|
+  visit '/job_offers/my'
+  page.should have_content(location)
+end
+
+And('the description should be {string}') do |description|
+  visit '/job_offers/my'
+  page.should have_content(description)
+end
+
+And('the salary should be {string}') do |salary|
+  visit '/job_offers/my'
+  page.should have_content(salary)
+end
+
+Then('I should see an offer error message asking to fill in the salary or input zero for unspecified salary') do
+  page.should have_content(SALARY_FIELD_BLANK_ERROR_MESSAGE)
+end
+
+Then('I activate the job offer') do
+  visit '/job_offers/my'
+  click_button('Activate')
+end
+
+Then('I should see a title {string} in the offers list with location {string}, description {string} and salary {string}') do
+|title, location, description, salary|
+  visit '/job_offers'
+  page.should have_content(title)
+  page.should have_content(location)
+  page.should have_content(description)
+  page.should have_content(salary)
+end
+
+Then('I should see an offer error message telling me the salary cannot be negative or to input zero for unspecified salary') do
+  page.should have_content(SALARY_FIELD_NEGATIVE_ERROR_MESSAGE)
+end
+
+When('I am in the creation form for a job offer') do
+  visit '/job_offers/new'
+end
+
+Then('I want to know how to declare an unspecified salary without guessing') do
+  page.should have_content(INPUT_FOR_UNSPECIFIED_SALARY)
+end
+
+When('I change the salary to {string}') do |salary|
+  click_link('Edit')
+  fill_in('job_offer_form[salary]', with: salary)
+  click_button('Save')
+end
+
+When('I change the description to {string}') do |description|
+  click_link('Edit')
+  fill_in('job_offer_form[description]', with: description)
+  click_button('Save')
+end
