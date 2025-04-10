@@ -40,7 +40,6 @@ if %w[development test travis].include?(RACK_ENV)
 
   Cucumber::Rake::Task.new(:billing_acceptance_tests) do |task|
     Rake::Task['db:migrate'].invoke
-    Rake::Task['db:seed'].invoke
     task.cucumber_opts = ['features', '--tags \'@billing\'']
   end
 
