@@ -17,8 +17,15 @@ Then('the total amount is {float}') do |expected_total_amount|
   expect(@report_as_json['total_amount']).to eq expected_total_amount
 end
 
-Given('a user {string} with {string} subscription') do |user_email, _subscription_type|
-  @user = User.create(user_email, user_email, 'somePassword!')
+Given('a user {string} with {string} subscription') do |user_email, subscription_type_string|
+  subscription_type = case subscription_type_string
+                      when 'on-demand'
+                        0
+                      else
+                        1
+                      end
+
+  @user = User.new(name: user_email, email: user_email, password: 'somePassword!', subscription_type:)
   UserRepository.new.save(@user)
 end
 
@@ -48,7 +55,7 @@ Then('the total active offers are {int}') do |expected_offer_count|
 end
 
 Given('another user {string} with {string} susbcription') do |user_email, _subscription_type|
-  @user = User.create(user_email, user_email, 'somePassword!')
+  @user = User.new(name: user_email, email: user_email, password: 'somePassword!')
   UserRepository.new.save(@user)
 end
 
@@ -86,7 +93,7 @@ Given('the user {string}') do |user_email|
 end
 
 Given('another user with {string} susbcription') do |_subscription_type|
-  @user = User.create('another', 'another@email.com', 'somePassword!')
+  @user = User.new(name: 'name', email: 'mail@mail.com', password: 'somePassword!')
   UserRepository.new.save(@user)
 end
 
