@@ -69,4 +69,14 @@ describe User do
 
     expect(user.billed_amount(offers)).to eq 20.0
   end
+
+  xit 'User with example@org.com and 2 active offer has a bill of 0.0' do
+    user = described_class.new(name: 'juan', email: 'example@org.com', password: 'password')
+    offers = []
+    2.times do
+      offers.push JobOffer.new(title: 'a title', salary: 0, is_active: true)
+    end
+
+    expect(user.billed_amount(offers)).to eq 0.0
+  end
 end
