@@ -2,6 +2,7 @@ require 'integration_spec_helper'
 
 describe UserRepository do
   let(:repository) { described_class.new }
+  let(:non_profit_subscription) { 1 }
 
   it 'should find by email' do
     joe_user = User.new(name: 'Joe', email: 'joe@doe.com', crypted_password: 'secure_pwd')
@@ -24,14 +25,19 @@ describe UserRepository do
   end
 
   it 'User repository saves and returns correctly an user with its subscription' do
-    joe_user = User.new(name: 'Joe', email: 'joe@doe.org', crypted_password: 'secure_pwd')
+    joe_user = User.new(name: 'Joe',
+                        email: 'joe@doe.org',
+                        crypted_password: 'secure_pwd',
+                        subscription_type: non_profit_subscription)
     repository.save(joe_user)
 
     offers = [JobOffer.new(
       title: 'Software Engineer',
-      salary: 100000)]
+      salary: 100_000,
+      is_active: true
+    )]
 
     found_user = repository.find_by_email(joe_user.email)
-    expect(joe_user.billed_amount(offers)).to eq 0.0
+    expect(found_user.billed_amount(offers)).to eq 0.0
   end
 end

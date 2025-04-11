@@ -3,6 +3,8 @@ require 'spec_helper'
 describe User do
   subject(:user) { described_class.new({}) }
 
+  let(:non_profit_subscription) { 1 }
+
   describe 'model' do
     it { is_expected.to respond_to(:id) }
     it { is_expected.to respond_to(:name) }
@@ -70,8 +72,11 @@ describe User do
     expect(user.billed_amount(offers)).to eq 20.0
   end
 
-  xit 'User with example@org.com and 2 active offer has a bill of 0.0' do
-    user = described_class.new(name: 'juan', email: 'example@org.com', password: 'password')
+  it 'User with example@org.com and 2 active offer has a bill of 0.0' do
+    user = described_class.new(name: 'juan',
+                               email: 'example@ngo.org',
+                               password: 'password',
+                               subscription_type: non_profit_subscription)
     offers = []
     2.times do
       offers.push JobOffer.new(title: 'a title', salary: 0, is_active: true)
