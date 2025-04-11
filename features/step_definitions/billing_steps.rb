@@ -47,8 +47,9 @@ Then('the total active offers are {int}') do |expected_offer_count|
   expect(@report_as_json['total_active_offers']).to eq expected_offer_count
 end
 
-Given('another user {string} with {string} susbcription') do |_user_email, _subscription_type|
-  pending # Write code here that turns the phrase above into concrete actions
+Given('another user {string} with {string} susbcription') do |user_email, _subscription_type|
+  @user = User.create(user_email, user_email, 'somePassword!')
+  UserRepository.new.save(@user)
 end
 
 Given('the user {string} has {int} active offers') do |user_email, active_offer_count|
