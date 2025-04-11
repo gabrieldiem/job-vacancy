@@ -1,6 +1,6 @@
 class User
   include ActiveModel::Validations
-  attr_accessor :id, :name, :email, :crypted_password, :updated_on, :created_on
+  attr_accessor :id, :name, :email, :crypted_password, :updated_on, :created_on, :subscription
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d-]+(\.[a-z]+)*\.[a-z]+\z/i
 

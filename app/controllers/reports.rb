@@ -15,7 +15,7 @@ JobVacancy::App.controllers :reports, provides: [:json] do
 
     all_users.each do |user|
       offers = job_offer_repo.find_by_owner(user)
-      amount_to_pay = OnDemandSubscription.new.calculate_cost offers
+      amount_to_pay = user.billed_amount(offers)
       total_amount += amount_to_pay
 
       report[:items].push({

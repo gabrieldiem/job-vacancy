@@ -1,9 +1,13 @@
 class OnDemandSubscription
   COST_PER_OFFER = 10
   DECIMALS = 1
+  SUBSCRIPTION_TYPE_ON_DEMAND = 0
+
+  attr_reader :id
 
   def initialize
     @cost_per_offer = COST_PER_OFFER
+    @id = SUBSCRIPTION_TYPE_ON_DEMAND
   end
 
   def calculate_cost(offers)

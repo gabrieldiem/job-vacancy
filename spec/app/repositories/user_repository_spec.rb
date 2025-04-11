@@ -22,4 +22,16 @@ describe UserRepository do
 
     expect(users.size).to eq(initial_user_count + 1)
   end
+
+  it 'User repository saves and returns correctly an user with its subscription' do
+    joe_user = User.new(name: 'Joe', email: 'joe@doe.org', crypted_password: 'secure_pwd')
+    repository.save(joe_user)
+
+    offers = [JobOffer.new(
+      title: 'Software Engineer',
+      salary: 100000)]
+
+    found_user = repository.find_by_email(joe_user.email)
+    expect(joe_user.billed_amount(offers)).to eq 0.0
+  end
 end
