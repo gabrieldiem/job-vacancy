@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe OnDemandSubscription do
+  let(:subscription_type_on_demand) { 0 }
+
   it 'Cost of 1 active offers is 10.0' do
     subscription = described_class.new
     expect(subscription.calculate_cost([JobOffer.new(title: 'a title', salary: 0, is_active: true)])).to eq 10.0
@@ -26,5 +28,10 @@ describe OnDemandSubscription do
 
     subscription = described_class.new
     expect(subscription.calculate_cost(offers)).to eq 0.0
+  end
+
+  it 'OnDemandSubscription should have ID = subscription_type_on_demand' do
+    subscription = described_class.new
+    expect(subscription.id).to eq subscription_type_on_demand
   end
 end
