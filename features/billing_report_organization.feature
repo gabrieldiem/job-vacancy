@@ -16,7 +16,7 @@ Scenario: o2 - non-profit organization subscription with 1 offer
     Then the amount to pay for the user "pepe@children.org" is 0.0
     And the total active offers are 1
 
-  @wip
+
 Scenario: o3 - non-profit organization subscription with 7 offers
     Given 7 active offers
     When I get the billing report
