@@ -58,6 +58,10 @@ class JobOffer
     MINIMUM_SALARY
   end
 
+  def is_active?
+    @is_active
+  end
+
   private
 
   def is_salary_valid?

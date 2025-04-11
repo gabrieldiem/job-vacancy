@@ -24,9 +24,12 @@ end
 
 Given('{int} active offers') do |offer_count|
   JobOfferRepository.new.delete_all if offer_count.zero?
-end
+  job_offer_repo = JobOfferRepository.new
 
-require 'debug'
+  offer_count.times do
+    job_offer_repo.save JobOffer.new(title: 'a title', user_id: @user.id, salary: 0, is_active: true)
+  end
+end
 
 Then('the amount to pay for the user {string} is {float}') do |user_email, expected_amount|
   target = nil
@@ -54,16 +57,28 @@ Given('the user {string} has {int} active offers') do |user_email, active_offer_
   owner = user_repo.find_by_email user_email
 
   active_offer_count.times do
-    job_offer_repo.save JobOffer.new(title: 'a title', user_id: owner.id, salary: 0)
+    job_offer_repo.save JobOffer.new(title: 'a title', user_id: owner.id, salary: 0, is_active: true)
   end
 end
 
-Given('{int} inactive offers') do |_inactive_offer_count|
-  pending # Write code here that turns the phrase above into concrete actions
+Given('{int} inactive offers') do |inactive_offer_count|
+  job_offer_repo = JobOfferRepository.new
+
+  inactive_offer_count.times do
+    job_offer_repo.save JobOffer.new(title: 'a title', user_id: @user.id, salary: 0, is_active: false)
+  end
 end
 
-Then('the billing for this user is {float}') do |_expected_amount|
-  pending # Write code here that turns the phrase above into concrete actions
+Then('the billing for this user is {float}') do |expected_amount|
+  target = nil
+
+  @report_as_json['items'].each do |user_info|
+    target = user_info if user_info['user_email'] == @user.email
+  end
+
+  expect(target).to_not be_nil
+  expect(target['user_email']).to eq @user.email
+  expect(target['amount_to_pay']).to eq expected_amount
 end
 
 Given('the user {string}') do |_user_email|
