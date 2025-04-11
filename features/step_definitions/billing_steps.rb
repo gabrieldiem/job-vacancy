@@ -26,9 +26,18 @@ Given('{int} active offers') do |offer_count|
   JobOfferRepository.new.delete_all if offer_count.zero?
 end
 
+require 'debug'
+
 Then('the amount to pay for the user {string} is {float}') do |user_email, expected_amount|
-  expect(@report_as_json['items'][0]['user_email']).to eq user_email
-  expect(@report_as_json['items'][0]['amount_to_pay']).to eq expected_amount
+  target = nil
+
+  @report_as_json['items'].each do |user_info|
+    target = user_info if user_info['user_email'] == user_email
+  end
+
+  expect(target).to_not be_nil
+  expect(target['user_email']).to eq user_email
+  expect(target['amount_to_pay']).to eq expected_amount
 end
 
 Then('the total active offers are {int}') do |_expected_offer_count|
@@ -39,8 +48,14 @@ Given('another user {string} with {string} susbcription') do |_user_email, _subs
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-Given('the user {string} has {int} active offers') do |_user_email, _active_offer_count|
-  pending # Write code here that turns the phrase above into concrete actions
+Given('the user {string} has {int} active offers') do |user_email, active_offer_count|
+  user_repo = UserRepository.new
+  job_offer_repo = JobOfferRepository.new
+  owner = user_repo.find_by_email user_email
+
+  active_offer_count.times do
+    job_offer_repo.save JobOffer.new(title: 'a title', user_id: owner.id, salary: 0)
+  end
 end
 
 Given('{int} inactive offers') do |_inactive_offer_count|
