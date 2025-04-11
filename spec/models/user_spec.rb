@@ -60,4 +60,13 @@ describe User do
 
     expect(user.billed_amount(offers)).to eq 10.0
   end
+
+  it 'User with OnDemandSubscription and 2 active offer has a bill of 20.0' do
+    offers = []
+    2.times do
+      offers.push JobOffer.new(title: 'a title', salary: 0, is_active: true)
+    end
+
+    expect(user.billed_amount(offers)).to eq 20.0
+  end
 end
