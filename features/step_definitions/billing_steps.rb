@@ -107,5 +107,18 @@ When('I try to activate 1 more offer I receive an error') do
   job_offers.each do |offer|
     target = offer unless offer.is_active?
   end
+
+  expect(target).to_not be_nil
   expect(target.activate).to raise_error StandardError
 end
+
+Given('a user with email {string}') do |user_email|
+  @non_org_email = user_email
+end
+
+Then('I should not be able to create a non-profit organization subscription') do ||
+  expect do
+    User.new(name: 'name', email: @non_org_email, password: 'somePassword!')
+  end.to raise_error InvalidEmailForNonProfitOrganizationSubscriptionException
+end
+
