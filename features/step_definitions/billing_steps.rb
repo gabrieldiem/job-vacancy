@@ -93,3 +93,12 @@ end
 Then('the amount to pay for the user {string} is {float}.') do |_user_email, _expected_amount|
   pending # Write code here that turns the phrase above into concrete actions
 end
+
+When('I try to activate 1 more offer I receive an error') do
+  job_offers = JobOfferRepository.new.find_by_owner @user
+  target = nil
+  job_offers.each do |offer|
+    target = offer unless offer.is_active?
+  end
+  expect(target.activate).to raise_error StandardError
+end
