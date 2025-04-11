@@ -72,7 +72,7 @@ describe User do
     expect(user.billed_amount(offers)).to eq 20.0
   end
 
-  it 'User with example@org.com and 2 active offer has a bill of 0.0' do
+  it 'User with example@org.com and non-profit subscription and 2 active offer has a bill of 0.0' do
     user = described_class.new(name: 'juan',
                                email: 'example@ngo.org',
                                password: 'password',
