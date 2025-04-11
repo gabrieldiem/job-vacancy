@@ -28,9 +28,14 @@ class User
                         end
     @updated_on = data[:updated_on]
     @created_on = data[:created_on]
+    @subscription = OnDemandSubscription.new
   end
 
   def has_password?(password)
     Crypto.decrypt(crypted_password) == password
+  end
+
+  def billed_amount(offers)
+    @subscription.calculate_cost offers
   end
 end

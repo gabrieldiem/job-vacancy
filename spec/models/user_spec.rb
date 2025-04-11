@@ -54,4 +54,10 @@ describe User do
       expect(user).to have_password(password)
     end
   end
+
+  it 'User with OnDemandSubscription and 1 active offer has a bill of 10.0' do
+    offers = [JobOffer.new(title: 'a title', salary: 0, is_active: true)]
+
+    expect(user.billed_amount(offers)).to eq 10.0
+  end
 end
