@@ -37,7 +37,6 @@ Scenario: o5 - non-profit organization subscription should have 7 active offers 
     And 1 inactive offers
     When I try to activate 1 more offer I receive an error
 
-  @wip
 Scenario: o6 - non-profit organization subscription should have a .org email domain.
     Given a user with email "pepe@gmail.com"
     Then I should not be able to create a non-profit organization subscription
