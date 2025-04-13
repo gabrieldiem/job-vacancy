@@ -1,5 +1,3 @@
-require 'debug'
-
 class JobOffer
   include ActiveModel::Validations
   include ActiveModel::Validations::Callbacks
