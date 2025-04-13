@@ -34,4 +34,10 @@ describe OnDemandSubscription do
     subscription = described_class.new
     expect(subscription.id).to eq subscription_type_on_demand
   end
+
+  it 'OnDemandSubscription does have allowance if user has 100 active offers' do
+    subscription = described_class.new
+    active_offers = 100
+    expect(subscription.has_allowance?(active_offers)).to be true
+  end
 end
