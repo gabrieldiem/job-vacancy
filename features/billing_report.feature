@@ -15,7 +15,7 @@ Feature: Billing Report
     And the subscription is "on-demand"
     And the active_offers_count is 1
     And the amount to pay is 10.0
-@wip
+
   Scenario: b3 - billing report contains all required fields for non-profit organization subscription
     Given a user "pedro@test.org" with "non-profit organization" subscription
     And 2 active offers
