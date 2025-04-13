@@ -31,7 +31,7 @@ Scenario: o4 - non-profit organization subscription with 8 offers (1 inactive)
     Then the amount to pay for the user "pepe@children.org" is 0.0
     And the total active offers are 7
 
-  @wip
+
 Scenario: o5 - non-profit organization subscription should have 7 active offers as maximum.
     Given 7 active offers
     And 1 inactive offers

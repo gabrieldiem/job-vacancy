@@ -102,14 +102,18 @@ Then('the amount to pay for the user {string} is {float}.') do |_user_email, _ex
 end
 
 When('I try to activate 1 more offer I receive an error') do
-  job_offers = JobOfferRepository.new.find_by_owner @user
+  job_offer_repo = JobOfferRepository.new
+  job_offers = job_offer_repo.find_by_owner @user
   target = nil
   job_offers.each do |offer|
     target = offer unless offer.is_active?
   end
 
+  offer_counter = OfferCounter.new(job_offer_repo)
   expect(target).to_not be_nil
-  expect(target.activate).to raise_error StandardError
+  expect do
+    target.activate(offer_counter.count_active_by_user(@user))
+  end.to raise_error OffersLimitExceededException
 end
 
 Given('a user with email {string}') do |user_email|
