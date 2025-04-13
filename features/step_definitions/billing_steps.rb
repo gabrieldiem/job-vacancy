@@ -126,18 +126,29 @@ Then('I should not be able to create a non-profit organization subscription') do
   end.to raise_error InvalidEmailForNonProfitOrganizationSubscriptionException
 end
 
-Then('{string} is on user_email report field') do |_string|
-  pending # Write code here that turns the phrase above into concrete actions
+def get_item_by_user_email(items, user_email)
+  target = nil
+
+  items.each do |user_info|
+    target = user_info if user_info['user_email'] == user_email
+  end
+
+  target
 end
 
-Then('the subscription is {string}') do |_string|
-  pending # Write code here that turns the phrase above into concrete actions
+Then('{string} is on user_email report field') do |user_email|
+  @item = get_item_by_user_email(@report_as_json['items'], user_email)
+  expect(@item['user_email']).to eq user_email
 end
 
-Then('the active_offers_count is {int}') do |_int|
-  pending # Write code here that turns the phrase above into concrete actions
+Then('the subscription is {string}') do |subscription_type_message|
+  expect(@item['subscription']).to eq subscription_type_message
 end
 
-Then('the amount to pay is {float}') do |_float|
-  pending # Write code here that turns the phrase above into concrete actions
+Then('the active_offers_count is {int}') do |active_offers_count|
+  expect(@item['active_offers_count']).to eq active_offers_count
+end
+
+Then('the amount to pay is {float}') do |amount_to_pay|
+  expect(@item['amount_to_pay']).to eq amount_to_pay
 end
