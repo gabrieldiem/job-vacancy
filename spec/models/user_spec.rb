@@ -1,7 +1,12 @@
 require 'spec_helper'
+require_relative '../../models/exceptions/offers_limit_exceeded_exception'
+require_relative '../../models/subscriptions/subscription_types_consts'
 
 describe User do
   subject(:user) { described_class.new({}) }
+
+  let(:on_demand_subscription) { SUBSCRIPTION_TYPE_ON_DEMAND }
+  let(:non_profit_subscription) { SUBSCRIPTION_TYPE_NON_PROFIT_ORGANIZATION }
 
   describe 'model' do
     it { is_expected.to respond_to(:id) }
@@ -53,5 +58,75 @@ describe User do
     it 'should return true when password do  match' do
       expect(user).to have_password(password)
     end
+  end
+
+  it 'User with OnDemandSubscription and 1 active offer has a bill of 10.0' do
+    offers = [JobOffer.new(title: 'a title', salary: 0, is_active: true)]
+
+    expect(user.billed_amount(offers)).to eq 10.0
+  end
+
+  it 'User with OnDemandSubscription and 2 active offer has a bill of 20.0' do
+    offers = []
+    2.times do
+      offers.push JobOffer.new(title: 'a title', salary: 0, is_active: true)
+    end
+
+    expect(user.billed_amount(offers)).to eq 20.0
+  end
+
+  it 'User with example@org.com and non-profit subscription and 2 active offer has a bill of 0.0' do
+    user = described_class.new(name: 'juan',
+                               email: 'example@ngo.org',
+                               password: 'password',
+                               subscription_type: non_profit_subscription)
+    offers = []
+    2.times do
+      offers.push JobOffer.new(title: 'a title', salary: 0, is_active: true)
+    end
+
+    expect(user.billed_amount(offers)).to eq 0.0
+  end
+
+  it 'User with example@ngo.org and non-profit subscription and 2 active and 1 inactive offer has a bill of 0.0' do
+    user = described_class.new(name: 'juan',
+                               email: 'example@ngo.org',
+                               password: 'password',
+                               subscription_type: non_profit_subscription)
+    offers = []
+    2.times do
+      offers.push JobOffer.new(title: 'a title', salary: 0, is_active: true)
+    end
+
+    offers.push JobOffer.new(title: 'a title', salary: 0, is_active: false)
+
+    expect(user.billed_amount(offers)).to eq 0.0
+  end
+
+  it 'User with non-profit subscription and 7 active and 1 inactive offer should not be able to active the 8th' do
+    user = described_class.new(name: 'juan',
+                               email: 'example@ngo.org',
+                               password: 'password',
+                               subscription_type: non_profit_subscription)
+    user_offers = []
+    7.times do
+      user_offers.push JobOffer.new(title: 'a title', salary: 0, is_active: true)
+    end
+    repo = instance_double('offer_repo', find_by_owner: user_offers)
+
+    target = JobOffer.new(title: 'a title', salary: 0, is_active: false)
+    target.owner = user
+
+    offer_counter = OfferCounter.new(repo)
+    expect { target.activate(offer_counter.count_active_by_user(user)) }.to raise_error OffersLimitExceededException
+  end
+
+  it 'User with OnDemandSubscription and 10 active offers has allowance' do
+    user = described_class.new(name: 'juan',
+                               email: 'example@ngo.org',
+                               password: 'password',
+                               subscription_type: on_demand_subscription)
+    active_offers_count = 10
+    expect(user.subscription_has_allowance?(active_offers_count)).to be true
   end
 end

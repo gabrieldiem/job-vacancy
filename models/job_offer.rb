@@ -1,3 +1,5 @@
+require 'debug'
+
 class JobOffer
   include ActiveModel::Validations
   include ActiveModel::Validations::Callbacks
@@ -36,7 +38,8 @@ class JobOffer
     self.user = a_user
   end
 
-  def activate
+  def activate(current_active_offers_for_user)
+    user.subscription_has_allowance? current_active_offers_for_user
     self.is_active = true
   end
 
@@ -45,7 +48,7 @@ class JobOffer
   end
 
   def old_offer?
-    (Date.today - updated_on) >= 30
+    (Date.today - @updated_on) >= 30
   end
 
   def is_salary_specified?
@@ -54,6 +57,10 @@ class JobOffer
 
   def self.unspecified_salary_number
     MINIMUM_SALARY
+  end
+
+  def is_active?
+    @is_active
   end
 
   private
