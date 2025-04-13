@@ -26,10 +26,10 @@ JobVacancy::App.controllers :reports, provides: [:json] do
                             user_email: user.email,
                             subscription: SUBSCRIPTIONS_TYPES[user.subscription.id],
                             active_offers_count: offer_counter.count_active_offers(offers),
-                            amount_to_pay:
+                            amount_to_pay: amount_to_pay.to_f
                           })
     end
-    report[:total_amount] = total_amount
+    report[:total_amount] = total_amount.to_f
     return report.to_json
   end
 end
