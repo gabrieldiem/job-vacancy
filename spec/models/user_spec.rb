@@ -120,7 +120,7 @@ describe User do
     expect { target.activate(offer_counter.count_active_by_user(user)) }.to raise_error OffersLimitExceededException
   end
 
-  xit 'User with OnDemandSubscription and 10 active offers has allowance' do
+  it 'User with OnDemandSubscription and 10 active offers has allowance' do
     user = described_class.new(name: 'juan',
                                email: 'example@ngo.org',
                                password: 'password',
