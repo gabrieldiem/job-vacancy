@@ -8,12 +8,8 @@ class OfferCounter
   end
 
   def count_active_by_user(user_id)
-    counter = 0
     offers = @repo.find_by_owner(user_id)
-    offers.each do |offer|
-      counter += 1 if offer.is_active?
-    end
-    counter
+    count_active_offers(offers)
   end
 
   def count_active_offers(offers)
