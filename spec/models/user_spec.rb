@@ -1,5 +1,5 @@
 require 'spec_helper'
-require_relative '../../models/offers_limit_exceeded_exception'
+require_relative '../../models/exceptions/offers_limit_exceeded_exception'
 
 describe User do
   subject(:user) { described_class.new({}) }

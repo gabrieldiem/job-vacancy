@@ -1,5 +1,5 @@
 require 'spec_helper'
-require_relative '../../models/invalid_email_exception'
+require_relative '../../models/exceptions/invalid_email_exception'
 
 describe NonProfitOrganizationSubscription do
   let(:org_email) { 'example@example.org' }
