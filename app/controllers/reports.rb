@@ -1,16 +1,20 @@
+SUBSCRIPTIONS_TYPES = {
+  0 => 'on-demand'.freeze,
+  1 => 'organizational'.freeze
+}.freeze
+
 JobVacancy::App.controllers :reports, provides: [:json] do
   get :billing do
     job_offer_repo = JobOfferRepository.new
     users_repo = UserRepository.new
-
     offer_counter = OfferCounter.new(job_offer_repo)
+
     all_users = users_repo.all
     total_amount = 0
 
     report = {
       items: [],
-      total_active_offers: offer_counter.count_active,
-      total_amount:
+      total_active_offers: offer_counter.count_active
     }
 
     all_users.each do |user|
@@ -19,13 +23,13 @@ JobVacancy::App.controllers :reports, provides: [:json] do
       total_amount += amount_to_pay
 
       report[:items].push({
-                            amount_to_pay:,
-                            user_email: user.email
+                            user_email: user.email,
+                            subscription: SUBSCRIPTIONS_TYPES[user.subscription.id],
+                            active_offers_count: offer_counter.count_active_offers(offers),
+                            amount_to_pay:
                           })
     end
-
     report[:total_amount] = total_amount
-
     return report.to_json
   end
 end

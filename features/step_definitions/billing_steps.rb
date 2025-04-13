@@ -126,18 +126,18 @@ Then('I should not be able to create a non-profit organization subscription') do
   end.to raise_error InvalidEmailForNonProfitOrganizationSubscriptionException
 end
 
-Then('{string} is on user_email report field') do |string|
+Then('{string} is on user_email report field') do |_string|
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-Then('the subscription is {string}') do |string|
+Then('the subscription is {string}') do |_string|
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-Then('the active_offers_count is {int}') do |int|
+Then('the active_offers_count is {int}') do |_int|
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-Then('the amount to pay is {float}') do |float|
+Then('the amount to pay is {float}') do |_float|
   pending # Write code here that turns the phrase above into concrete actions
 end

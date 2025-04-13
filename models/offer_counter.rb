@@ -15,4 +15,12 @@ class OfferCounter
     end
     counter
   end
+
+  def count_active_offers(offers)
+    count = 0
+    offers.each do |offer|
+      count += 1 if offer.is_active?
+    end
+    count
+  end
 end

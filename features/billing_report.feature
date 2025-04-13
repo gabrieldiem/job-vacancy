@@ -9,7 +9,7 @@ Feature: Billing Report
 @wip
   Scenario: b2 - billing report contains all required fields for on-demand subscription
     Given a user "pedro@test.com" with "on-demand" subscription
-    And 1 active offer
+    And 1 active offers
     When I get the billing report
     Then "pedro@test.com" is on user_email report field
     And the subscription is "on-demand"
