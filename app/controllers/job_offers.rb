@@ -76,8 +76,10 @@ JobVacancy::App.controllers :job_offers do
   end
 
   put :activate, with: :offer_id do
-    @job_offer = JobOfferRepository.new.find(params[:offer_id])
-    @job_offer.activate
+    job_offer_repo = JobOfferRepository.new
+    @job_offer = job_offer_repo.find(params[:offer_id])
+    offer_counter = OfferCounter.new job_offer_repo
+    @job_offer.activate(offer_counter.count_active_by_user(@job_offer.owner))
     if JobOfferRepository.new.save(@job_offer)
       flash[:success] = 'Offer activated'
     else

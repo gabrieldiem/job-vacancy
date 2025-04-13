@@ -30,4 +30,8 @@ class User
   def billed_amount(offers)
     @subscription.calculate_cost offers
   end
+
+  def subscription_has_allowance?(active_offers)
+    @subscription.has_allowance? active_offers
+  end
 end

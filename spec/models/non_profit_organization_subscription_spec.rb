@@ -21,4 +21,10 @@ describe NonProfitOrganizationSubscription do
     subscription = described_class.new org_email
     expect(subscription.id).to eq subscription_type_non_profit_organization
   end
+
+  it 'NonProfitOrganization does not have allowance if user has 7 active offers' do
+    subscription = described_class.new org_email
+    active_offers = 7
+    expect { subscription.has_allowance? active_offers }.to raise_error OffersLimitExceededException
+  end
 end

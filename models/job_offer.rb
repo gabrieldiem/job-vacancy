@@ -38,7 +38,8 @@ class JobOffer
     self.user = a_user
   end
 
-  def activate
+  def activate(current_active_offers_for_user)
+    user.subscription_has_allowance? current_active_offers_for_user
     self.is_active = true
   end
 

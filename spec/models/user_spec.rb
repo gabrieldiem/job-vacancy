@@ -1,8 +1,10 @@
 require 'spec_helper'
+require_relative '../../models/offers_limit_exceeded_exception'
 
 describe User do
   subject(:user) { described_class.new({}) }
 
+  let(:on_demand_subscription) { 0 }
   let(:non_profit_subscription) { 1 }
 
   describe 'model' do
@@ -116,5 +118,14 @@ describe User do
 
     offer_counter = OfferCounter.new(repo)
     expect { target.activate(offer_counter.count_active_by_user(user)) }.to raise_error OffersLimitExceededException
+  end
+
+  xit 'User with OnDemandSubscription and 10 active offers has allowance' do
+    user = described_class.new(name: 'juan',
+                               email: 'example@ngo.org',
+                               password: 'password',
+                               subscription_type: on_demand_subscription)
+    active_offers_count = 10
+    expect(user.subscription_has_allowance?(active_offers_count)).to be true
   end
 end
