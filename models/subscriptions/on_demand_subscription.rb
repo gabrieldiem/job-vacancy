@@ -1,7 +1,8 @@
+require_relative './subscription_types_consts'
+
 class OnDemandSubscription
   COST_PER_OFFER = 10
   DECIMALS = 1
-  SUBSCRIPTION_TYPE_ON_DEMAND = 0
   LIMIT_ALWAYS_AVAILABLE = true
 
   attr_reader :id

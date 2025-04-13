@@ -1,6 +1,8 @@
+require_relative '../../models/subscriptions/subscription_types_consts'
+
 SUBSCRIPTIONS_TYPES = {
-  0 => 'on-demand'.freeze,
-  1 => 'organizational'.freeze
+  SUBSCRIPTION_TYPE_ON_DEMAND => 'on-demand'.freeze,
+  SUBSCRIPTION_TYPE_NON_PROFIT_ORGANIZATION => 'organizational'.freeze
 }.freeze
 
 JobVacancy::App.controllers :reports, provides: [:json] do

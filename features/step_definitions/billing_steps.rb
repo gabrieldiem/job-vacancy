@@ -1,4 +1,5 @@
 require 'json'
+require_relative '../../models/subscriptions/subscription_types_consts'
 
 Given('there are no offers at all') do
   JobOfferRepository.new.delete_all
@@ -20,9 +21,9 @@ end
 Given('a user {string} with {string} subscription') do |user_email, subscription_type_string|
   subscription_type = case subscription_type_string
                       when 'on-demand'
-                        0
+                        SUBSCRIPTION_TYPE_ON_DEMAND
                       else
-                        1
+                        SUBSCRIPTION_TYPE_NON_PROFIT_ORGANIZATION
                       end
 
   @user = User.new(name: user_email, email: user_email, password: 'somePassword!', subscription_type:)

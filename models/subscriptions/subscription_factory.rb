@@ -1,6 +1,6 @@
-class SubscriptionFactory
-  SUBSCRIPTION_TYPE_ON_DEMAND = 0
+require_relative './subscription_types_consts'
 
+class SubscriptionFactory
   def create_subscription(subscription_type, email)
     case subscription_type
     when SUBSCRIPTION_TYPE_ON_DEMAND

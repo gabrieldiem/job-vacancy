@@ -1,5 +1,4 @@
-SUBSCRIPTION_TYPE_ON_DEMAND = 0
-SUBSCRIPTION_TYPE_NON_PROFIT_ORGANIZATION = 1
+require_relative '../../models/subscriptions/subscription_types_consts'
 
 Sequel.migration do
   up do

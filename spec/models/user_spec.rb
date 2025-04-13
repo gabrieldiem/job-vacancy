@@ -1,11 +1,12 @@
 require 'spec_helper'
 require_relative '../../models/exceptions/offers_limit_exceeded_exception'
+require_relative '../../models/subscriptions/subscription_types_consts'
 
 describe User do
   subject(:user) { described_class.new({}) }
 
-  let(:on_demand_subscription) { 0 }
-  let(:non_profit_subscription) { 1 }
+  let(:on_demand_subscription) { SUBSCRIPTION_TYPE_ON_DEMAND }
+  let(:non_profit_subscription) { SUBSCRIPTION_TYPE_NON_PROFIT_ORGANIZATION }
 
   describe 'model' do
     it { is_expected.to respond_to(:id) }
