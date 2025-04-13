@@ -1,3 +1,5 @@
+require_relative './subscriptions/subscription_factory'
+
 class User
   include ActiveModel::Validations
   attr_accessor :id, :name, :email, :crypted_password, :updated_on, :created_on, :subscription
