@@ -85,7 +85,7 @@ describe User do
     expect(user.billed_amount(offers)).to eq 0.0
   end
 
-  it 'User with example@org.com and non-profit subscription and 2 active and 1 inactive offer has a bill of 0.0' do
+  it 'User with example@ngo.org and non-profit subscription and 2 active and 1 inactive offer has a bill of 0.0' do
     user = described_class.new(name: 'juan',
                                email: 'example@ngo.org',
                                password: 'password',
@@ -98,5 +98,23 @@ describe User do
     offers.push JobOffer.new(title: 'a title', salary: 0, is_active: false)
 
     expect(user.billed_amount(offers)).to eq 0.0
+  end
+
+  xit 'User with non-profit subscription and 7 active and 1 inactive offer should not be able to active the 8th' do
+    user = described_class.new(name: 'juan',
+                               email: 'example@ngo.org',
+                               password: 'password',
+                               subscription_type: non_profit_subscription)
+    user_offers = []
+    7.times do
+      user_offers.push JobOffer.new(title: 'a title', salary: 0, is_active: true)
+    end
+    repo = instance_double('offer_repo', find_by_owner: user_offers)
+
+    target = JobOffer.new(title: 'a title', salary: 0, is_active: false)
+    target.owner = user
+
+    offer_counter = OfferCounter.new(repo)
+    expect { target.activate(offer_counter.count_active_by_user(user)) }.to raise_error OffersLimitExceededException
   end
 end
