@@ -13,8 +13,6 @@ class JobOffer
   validates :title, presence: true
   validate :is_salary_valid?
 
-  after_validation :parse_input_salary
-
   def initialize(data = {})
     @id = data[:id]
     @title = data[:title]
@@ -67,9 +65,5 @@ class JobOffer
     errors.add(:salary, SALARY_CANT_BE_BLANK_MESSAGE) if @salary.blank? || @salary.nil?
 
     errors.add(:salary, SALARY_CANT_BE_NEGATIVE_MESSAGE) if @salary.to_i < MINIMUM_SALARY
-  end
-
-  def parse_input_salary
-    @salary = @salary.to_i
   end
 end
