@@ -13,8 +13,6 @@ class JobOffer
   validates :title, presence: true
   validate :is_salary_valid?
 
-  after_validation :parse_input_salary
-
   def initialize(data = {})
     @id = data[:id]
     @title = data[:title]
@@ -36,7 +34,8 @@ class JobOffer
     self.user = a_user
   end
 
-  def activate
+  def activate(current_active_offers_for_user)
+    user.subscription_has_allowance? current_active_offers_for_user
     self.is_active = true
   end
 
@@ -45,7 +44,7 @@ class JobOffer
   end
 
   def old_offer?
-    (Date.today - updated_on) >= 30
+    (Date.today - @updated_on) >= 30
   end
 
   def is_salary_specified?
@@ -56,15 +55,15 @@ class JobOffer
     MINIMUM_SALARY
   end
 
+  def is_active?
+    @is_active
+  end
+
   private
 
   def is_salary_valid?
     errors.add(:salary, SALARY_CANT_BE_BLANK_MESSAGE) if @salary.blank? || @salary.nil?
 
     errors.add(:salary, SALARY_CANT_BE_NEGATIVE_MESSAGE) if @salary.to_i < MINIMUM_SALARY
-  end
-
-  def parse_input_salary
-    @salary = @salary.to_i
   end
 end

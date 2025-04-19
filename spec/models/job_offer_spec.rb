@@ -62,4 +62,9 @@ describe JobOffer do
   it 'The salary number to declare a salary as "Not specified" is 0' do
     expect(described_class.unspecified_salary_number).to be 0
   end
+
+  it 'A JobOffer created as inactive is inactive' do
+    offer = described_class.new(title: 'a title', salary: 0, is_active: false)
+    expect(offer.is_active?).to be false
+  end
 end
