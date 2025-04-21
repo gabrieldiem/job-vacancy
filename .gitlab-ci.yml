@@ -31,6 +31,6 @@ job_build_and_test:
 job_deploy_staging:
   stage: deploy_staging
   script:
-    - curl $DEPLOY_STAGING_URL\?$DEPLOY_STAGING_PARAMS
+    - curl $DEPLOY_PROD_URL\?$DEPLOY_PROD_PARAMS
   only:
-    - develop
+    - prod
