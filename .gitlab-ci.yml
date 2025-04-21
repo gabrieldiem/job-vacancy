@@ -14,7 +14,8 @@ variables:
 
 stages:
   - build
-  - deploy_staging
+  - deploy_test
+  - deploy_production
 
 job_build_and_test:
   stage: build
@@ -28,8 +29,15 @@ job_build_and_test:
     reports:
       junit: reports/spec/rspec.xml
 
-job_deploy_staging:
-  stage: deploy_staging
+job_deploy_test:
+  stage: deploy_test
+  script:
+    - curl $DEPLOY_TEST_URL\?$DEPLOY_TEST_PARAMS
+  only:
+    - test
+
+job_deploy_production:
+  stage: deploy_production
   script:
     - curl $DEPLOY_PROD_URL\?$DEPLOY_PROD_PARAMS
   only:
