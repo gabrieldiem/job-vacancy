@@ -5,6 +5,7 @@ JobVacancy::App.controllers :users do
   end
 
   post :create do
+    params[:user][:subscription_type] = params[:user][:subscription_type].to_i
     password_confirmation = params[:user][:password_confirmation]
     params[:user].reject! { |k, _| k == 'password_confirmation' }
 

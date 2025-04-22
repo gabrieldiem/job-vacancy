@@ -3,32 +3,35 @@ Feature: Subscription selection in registration
   I want to select my subscription type
   So I can register to publish offers
 
+  Background:
+    Given I am in the register page
+
   Scenario: US-2.1 Show all subscription types
     Given I press the button to see the subscription types
     Then I should be able to see all of the subscription types available
-
+@wip
   Scenario: US-2.2 Successful registration with subscription On Demand
     Given I fill the registration form and I select the subscription type “on-demand”
     When I press the Register button
     Then I should see the subscription type under my email
-
+@wip
   Scenario: US-2.3 Cannot register without subscription
     Given I fill the registration form and don’t select a subscription
     When I press the Register button
     Then I should see the error message “can’t be blank”
-
+@wip
   Scenario: US-2.4 Successful registration of NonCommercialOrganization subscription type
     Given I fill the registration form and I select the subscription type “non-profit organization”
     And email is “example@place.org”
     When I press the Register button
     Then I should see the subscription type under my email
-
+@wip
   Scenario: US-2.5 Cannot register with non-org email and NonCommercialOrganization subscription type
     Given I fill the registration form and I select the subscription type “non-profit organization”
     And email is “example@place.com”
     When I press the Register button
     Then I should see the error message “must have .org mail for non commercial organization subscription”
-
+@wip
   Scenario: US-2.6 Cannot active 8th job offer with non-profit organization
     Given I have a “non-profit organization” subscription with email “example@place.org”
     And add 7 active job offers

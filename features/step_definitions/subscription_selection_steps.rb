@@ -1,9 +1,12 @@
+Given('I am in the register page') do
+  visit '/register'
+end
+
 Given('I press the button to see the subscription types') do
-  pending # Write code here that turns the phrase above into concrete actions
 end
 
 Then('I should be able to see all of the subscription types available') do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(page).to have_select('user[subscription_type]', options: ['On demand', 'Non-commercial organization'])
 end
 
 Given('I fill the registration form and I select the subscription type “on-demand”') do
