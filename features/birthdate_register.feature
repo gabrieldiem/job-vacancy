@@ -23,9 +23,9 @@ Feature: Birthdate Registration
         Given I register with a birthdate of "2010/04/21"
         Then I should see the error message "must be over 18 to register"
 
-    @wip
+
     Scenario: US-1.5 Cannot register with a birthdate over 150 years old
-        Given I register with a birthdate of "2180/04/21"
+        Given I register with a birthdate of "1412/04/21"
         Then I should see the error message "birth date invalid"
 
     @wip
