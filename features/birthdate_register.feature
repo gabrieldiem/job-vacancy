@@ -11,7 +11,6 @@ Feature: Birthdate Registration
         Given I register with a birthdate of "1999/04/21"
         Then I should be able to complete the registration successfully
 
-    @wip
     Scenario: US-1.2 Successful registration with barely valid birthdate (18 yo)
         Given I register with a birthdate of "2007/04/21"
         Then I should be able to complete the registration successfully
