@@ -18,7 +18,8 @@
       	</div>
       	<div class="profile">
 						<% if signed_in? %>
-							<%= current_user.email %>
+              <%= current_user.email %> <br>
+              <%= "Subscription: " + get_subscription_name(current_user.subscription.id) %>
 						<% end %>
 				</div>
 				</div>

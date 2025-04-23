@@ -9,16 +9,28 @@ Then('I should be able to see all of the subscription types available') do
   expect(page).to have_select('user[subscription_type]', options: ['On demand', 'Non-commercial organization'])
 end
 
-Given('I fill the registration form and I select the subscription type “on-demand”') do
-  pending # Write code here that turns the phrase above into concrete actions
+Given('I fill the registration form and I select the subscription type {string}') do |subscription_type|
+  @user_email = 'pepe@gmail.com'
+  @user_password = 'abc'
+  @user_subscription_type = subscription_type
+
+  fill_in('user[name]', with: 'Pepe')
+  fill_in('user[email]', with: @user_email)
+  fill_in('user[password]', with: @user_password)
+  fill_in('user[password_confirmation]', with: @user_password)
+  select @user_subscription_type, from: 'user[subscription_type]'
 end
 
 When('I press the Register button') do
-  pending # Write code here that turns the phrase above into concrete actions
+  click_button('Create')
 end
 
 Then('I should see the subscription type under my email') do
-  pending # Write code here that turns the phrase above into concrete actions
+  visit '/login'
+  fill_in('user[email]', with: @user_email)
+  fill_in('user[password]', with: @user_password)
+  click_button('Login')
+  page.should have_content(@user_subscription_type)
 end
 
 Given('I fill the registration form and don’t select a subscription') do
