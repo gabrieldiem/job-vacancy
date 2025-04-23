@@ -58,6 +58,8 @@ class User
   def validate_birthdate
     return if @birthdate.nil?
 
+    errors.add(:birthdate, 'date must be in the past') if @birthdate > @current_date
+
     age = ((@current_date - @birthdate).to_i / 365.25).floor
     errors.add(:birthdate, 'must be over 18 to register') if age < MIN_AGE
   end
