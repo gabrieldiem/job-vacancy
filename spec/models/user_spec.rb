@@ -60,6 +60,22 @@ describe User do
     end
   end
 
+  describe 'birthdate' do
+    it 'should be false when birthdate is a invalid date' do
+      user = described_class.new(name: 'John Doe', email: 'john@doe.com',
+                                 crypted_password: 'a_secure_passWord!',
+                                 birthdate: '2000/10/8', current_date: Date.new(2005, 10, 8))
+      expect(user.valid?).to eq false
+    end
+
+    it 'should be true when birthdate is valid' do
+      user = described_class.new(name: 'John Doe', email: 'john@doe.com',
+                                 crypted_password: 'a_secure_passWord!',
+                                 birthdate: '2000/10/8', current_date: Date.new(2021, 10, 8))
+      expect(user.valid?).to eq true
+    end
+  end
+
   it 'User with OnDemandSubscription and 1 active offer has a bill of 10.0' do
     offers = [JobOffer.new(title: 'a title', salary: 0, is_active: true)]
 
