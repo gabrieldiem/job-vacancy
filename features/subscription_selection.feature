@@ -24,7 +24,7 @@ Feature: Subscription selection in registration
     Given I fill the registration form and I select the subscription type "Non-commercial organization" and email is "example@place.org"
     When I press the Register button
     Then I should see the subscription type under my email
-@wip
+
   Scenario: US-2.5 Cannot register with non-org email and NonCommercialOrganization subscription type
     Given I fill the registration form and I select the subscription type "Non-commercial organization" and email is "pepe@gmail.com"
     When I press the Register button
