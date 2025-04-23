@@ -3,8 +3,10 @@
 	<%= f.text_field :name %>
 	<%= f.label :email %>
  	<%= f.text_field :email %>
+  <%= errors_for(@errors, :email) %>
   <%= f.label :subscription_type, :caption => "Subscription:" %>
   <%= f.select :subscription_type, :options => [[get_subscription_name(SUBSCRIPTION_TYPE_ON_DEMAND), SUBSCRIPTION_TYPE_ON_DEMAND ], [get_subscription_name(SUBSCRIPTION_TYPE_NON_PROFIT_ORGANIZATION),SUBSCRIPTION_TYPE_NON_PROFIT_ORGANIZATION]]  %>
+  <%= errors_for(@errors, :subscription_type) %>
   <%= f.label :password %>
   <%= f.password_field :password %>
   <%= f.label :password_confirmation %>

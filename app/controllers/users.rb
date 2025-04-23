@@ -23,5 +23,10 @@ JobVacancy::App.controllers :users do
       flash.now[:error] = 'Passwords do not match'
       render 'users/new'
     end
+  rescue ActiveModel::ValidationError => e
+    @user = User.new
+    @errors = e.model.errors
+    flash.now[:error] = 'Please review the errors'
+    render 'users/new'
   end
 end

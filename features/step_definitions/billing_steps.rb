@@ -124,7 +124,7 @@ end
 Then('I should not be able to create a non-profit organization subscription') do
   expect do
     User.new(name: 'name', email: @non_org_email, password: 'somePassword!', subscription_type: 1)
-  end.to raise_error InvalidEmailForNonProfitOrganizationSubscriptionException
+  end.to raise_error ActiveModel::ValidationError
 end
 
 def get_item_by_user_email(items, user_email)

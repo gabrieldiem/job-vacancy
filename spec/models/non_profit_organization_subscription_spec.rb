@@ -1,5 +1,4 @@
 require 'spec_helper'
-require_relative '../../models/exceptions/invalid_email_exception'
 
 describe NonProfitOrganizationSubscription do
   let(:org_email) { 'example@example.org' }
@@ -12,9 +11,9 @@ describe NonProfitOrganizationSubscription do
   end
 
   it 'Not @org email is invalid for NonProfitOrganizationSubscription' do
-    expect do
-      described_class.new 'pepe@gmail.com'
-    end.to raise_error InvalidEmailForNonProfitOrganizationSubscriptionException
+    check_validation(:email, 'Email must have .org mail for non commercial organization subscription') do
+      described_class.new('pepe@gmail.com')
+    end
   end
 
   it 'NonProfitOrganization should have ID = subscription_type_non_profit_organization' do
