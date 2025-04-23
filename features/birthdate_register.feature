@@ -19,7 +19,6 @@ Feature: Birthdate Registration
         Given I register with a birthdate of "2030/04/21"
         Then I should see the error message "date must be in the past"
 
-    @wip
     Scenario: US-1.4 Cannot register with a birthdate under 18 years old
         Given I register with a birthdate of "2010/04/21"
         Then I should see the error message "must be over 18 to register"
