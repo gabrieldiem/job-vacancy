@@ -11,7 +11,7 @@ Feature: Subscription selection in registration
     Then I should be able to see all of the subscription types available
 
   Scenario: US-2.2 Successful registration with subscription On Demand
-    Given I fill the registration form and I select the subscription type "On demand"
+    Given I fill the registration form and I select the subscription type "On demand" and email is "pepe@gmail.com"
     When I press the Register button
     Then I should see the subscription type under my email
 @wip
@@ -19,10 +19,9 @@ Feature: Subscription selection in registration
     Given I fill the registration form and don’t select a subscription
     When I press the Register button
     Then I should see the error message “can’t be blank”
-@wip
+
   Scenario: US-2.4 Successful registration of NonCommercialOrganization subscription type
-    Given I fill the registration form and I select the subscription type "non-profit organization"
-    And email is “example@place.org”
+    Given I fill the registration form and I select the subscription type "Non-commercial organization" and email is "example@place.org"
     When I press the Register button
     Then I should see the subscription type under my email
 @wip

@@ -9,8 +9,8 @@ Then('I should be able to see all of the subscription types available') do
   expect(page).to have_select('user[subscription_type]', options: ['On demand', 'Non-commercial organization'])
 end
 
-Given('I fill the registration form and I select the subscription type {string}') do |subscription_type|
-  @user_email = 'pepe@gmail.com'
+Given('I fill the registration form and I select the subscription type {string} and email is {string}') do |subscription_type, email|
+  @user_email = email
   @user_password = 'abc'
   @user_subscription_type = subscription_type
 
@@ -38,10 +38,6 @@ Given('I fill the registration form and don’t select a subscription') do
 end
 
 Then('I should see the error message “can’t be blank”') do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Given('I fill the registration form and I select the subscription type “non-profit organization”') do
   pending # Write code here that turns the phrase above into concrete actions
 end
 
