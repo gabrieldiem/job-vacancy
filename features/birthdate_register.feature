@@ -15,7 +15,6 @@ Feature: Birthdate Registration
         Given I register with a birthdate of "2007/04/21"
         Then I should be able to complete the registration successfully
 
-    @wip
     Scenario: US-1.3 Cannot register with a future birthdate
         Given I register with a birthdate of "2030/04/21"
         Then I should see the error message "date must be in the past"
