@@ -6,6 +6,7 @@ class User
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d-]+(\.[a-z]+)*\.[a-z]+\z/i
   MIN_AGE = 18
+  MAX_AGE = 150
 
   validate :validate_birthdate
   validates :name, :crypted_password, presence: true
@@ -62,5 +63,6 @@ class User
 
     age = ((@current_date - @birthdate).to_i / 365.25).floor
     errors.add(:birthdate, 'must be over 18 to register') if age < MIN_AGE
+    errors.add(:birthdate, 'birth date invalid') if age > MAX_AGE
   end
 end
