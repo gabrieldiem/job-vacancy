@@ -4,11 +4,11 @@
 	<%= f.label :email %>
  	<%= f.text_field :email %>
   <%= errors_for(@errors, :email) %>
+  <%= f.label :birthdate %>
+  <%= f.text_field :birthdate, id: 'birthdate' %>
   <%= f.label :subscription_type, :caption => "Subscription:" %>
   <%= f.select :subscription_type, :options => [[get_subscription_name(SUBSCRIPTION_TYPE_ON_DEMAND), SUBSCRIPTION_TYPE_ON_DEMAND ], [get_subscription_name(SUBSCRIPTION_TYPE_NON_PROFIT_ORGANIZATION),SUBSCRIPTION_TYPE_NON_PROFIT_ORGANIZATION]]  %>
   <%= errors_for(@errors, :subscription_type) %>
-  <%= f.label :birthdate %>
-  <%= f.text_field :birthdate %>
   <%= f.label :password %>
   <%= f.password_field :password %>
   <%= f.label :password_confirmation %>
@@ -16,3 +16,14 @@
   <br/>
   <%= f.submit "Create", :class => "btn btn-primary" %>
 <% end %>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    flatpickr("#birthdate", {
+      dateFormat: "Y/m/d",
+      maxDate: "today"
+    });
+  });
+</script>
+
