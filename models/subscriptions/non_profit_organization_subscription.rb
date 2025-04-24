@@ -11,7 +11,10 @@ class NonProfitOrganizationSubscription
   attr_reader :id
 
   validate :is_email_valid?
+
   INVALID_EMAIL_MESSAGE = 'must have .org mail for non commercial organization subscription'.freeze
+  OFFERS_LIMIT_EXCEEDED_MESSAGE = "limit exceeded for non commercial organization subscription.
+                                   Max is #{OFFERS_LIMIT} active offers".freeze
 
   def initialize(email)
     @id = SUBSCRIPTION_TYPE_NON_PROFIT_ORGANIZATION
@@ -20,7 +23,7 @@ class NonProfitOrganizationSubscription
   end
 
   def has_allowance?(active_offers)
-    raise OffersLimitExceededException if active_offers >= OFFERS_LIMIT
+    raise OffersLimitExceededException, OFFERS_LIMIT_EXCEEDED_MESSAGE if active_offers >= OFFERS_LIMIT
 
     active_offers < OFFERS_LIMIT
   end
