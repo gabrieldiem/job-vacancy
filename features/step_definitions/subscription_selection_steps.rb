@@ -33,31 +33,41 @@ Then('I should see the subscription type under my email') do
   page.should have_content(@user_subscription_type)
 end
 
-Given('I fill the registration form and don’t select a subscription') do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Given('email is “example@place.org”') do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Given('email is “example@place.com”') do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
 Then('I should see the error message {string}') do |error_message|
   page.should have_content(error_message)
 end
 
-Given('I have a “non-profit organization” subscription with email “example@place.org”') do
-  pending # Write code here that turns the phrase above into concrete actions
+Given('I have a {string} subscription with email {string}') do |subscription_type_string, email|
+  subscription_type = case subscription_type_string
+                      when 'On demand'
+                        SUBSCRIPTION_TYPE_ON_DEMAND
+                      else
+                        SUBSCRIPTION_TYPE_NON_PROFIT_ORGANIZATION
+                      end
+
+  @user_email = email
+  @user_password = 'somePassword'
+  @user = User.new(name: email, email:, password: @user_password, subscription_type:)
+  UserRepository.new.save(@user)
 end
 
-Given('add {int} active job offers') do |_int|
-  # Given('add {float} active job offers') do |float|
-  pending # Write code here that turns the phrase above into concrete actions
+Given('add {int} active job offers') do |offer_count|
+  JobOfferRepository.new.delete_all if offer_count.zero?
+  job_offer_repo = JobOfferRepository.new
+
+  offer_count.times do
+    job_offer_repo.save JobOffer.new(title: 'a title', user_id: @user.id, salary: 0, is_active: true)
+  end
+
+  job_offer_repo.save JobOffer.new(title: 'a title', user_id: @user.id, salary: 0, is_active: false)
 end
 
 When('I press the button to activate the 8th active job offer') do
-  pending # Write code here that turns the phrase above into concrete actions
+  visit '/login'
+  fill_in('user[email]', with: @user_email)
+  fill_in('user[password]', with: @user_password)
+  click_button('Login')
+
+  visit '/job_offers/my'
+  click_button('Activate')
 end

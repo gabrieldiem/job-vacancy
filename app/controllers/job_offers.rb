@@ -1,3 +1,5 @@
+require_relative '../../models/exceptions/offers_limit_exceeded_exception'
+
 JobVacancy::App.controllers :job_offers do
   get :my do
     @offers = JobOfferRepository.new.find_by_owner(current_user)
@@ -87,6 +89,10 @@ JobVacancy::App.controllers :job_offers do
     end
 
     redirect '/job_offers/my'
+  rescue OffersLimitExceededException => e
+    flash.now[:error] = e.message
+    @offers = JobOfferRepository.new.find_by_owner(current_user)
+    render 'job_offers/my_offers'
   end
 
   delete :destroy do
