@@ -5,7 +5,9 @@ user_repository = UserRepository.new
 unless user_repository.all.count.positive?
   test_user = User.new(email: 'offerer@test.com',
                        name: 'Offerer',
-                       password: 'Passw0rd!')
+                       password: 'Passw0rd!',
+                       birthdate: '2000/01/01',
+                       current_date: Date.new(2025, 1, 1))
 
   user_repository.save test_user
 end

@@ -31,7 +31,6 @@ Feature: Birthdate Registration
         Given I register with a birthdate of "january first, 2001"
         Then I should see the error message "invalid date format"
 
-    @wip
     Scenario: US-1.7 Cannot register without a birthdate
         Given I register with a birthdate of ""
         Then I should see the error message "can't be blank"

@@ -2,19 +2,20 @@ require_relative './subscriptions/subscription_factory'
 
 class User
   include ActiveModel::Validations
-  attr_accessor :id, :name, :email, :crypted_password, :updated_on, :created_on, :subscription
+  attr_accessor :id, :name, :email, :crypted_password, :updated_on, :created_on, :subscription, :birthdate
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d-]+(\.[a-z]+)*\.[a-z]+\z/i
   MIN_AGE = 18
   MAX_AGE = 150
 
-  validate :validate_birthdate
+  validate :validate_birthdate_format
+  validate :validate_birthdate_rules
   validates :name, :crypted_password, presence: true
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX,
                                               message: 'invalid' }
 
   def initialize(data = {})
-    data[:birthdate] = '2000/12/12' if data[:birthdate] == ''
+    data[:birthdate] = data[:birthdate] || '2000/01/01'
     assign_basic_attributes(data, data[:current_date] || Date.today)
     assign_subscription(data)
     assign_password(data)
@@ -56,15 +57,20 @@ class User
                         end
   end
 
-  def validate_birthdate
-    return if @birthdate.nil?
+  def validate_birthdate_format
+    return errors.add(:birthdate, 'can\'t be blank') if @birthdate == ''
 
     begin
-      @birthdate = Date.strptime(@birthdate || '2000/12/12', '%Y/%m/%d')
+      @birthdate = Date.strptime(@birthdate, '%Y/%m/%d')
     rescue Date::Error
       errors.add(:birthdate, 'invalid date format')
-      return
+      @birthdate = nil
+      nil
     end
+  end
+
+  def validate_birthdate_rules
+    return if birthdate.nil? || birthdate == ''
 
     errors.add(:birthdate, 'date must be in the past') if @birthdate > @current_date
 

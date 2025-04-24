@@ -14,7 +14,8 @@ class UserRepository < BaseRepository
       name: user.name,
       crypted_password: user.crypted_password,
       email: user.email,
-      subscription_type: user.subscription.id
+      subscription_type: user.subscription.id,
+      birthdate: user.birthdate
     }
   end
 end
