@@ -33,18 +33,6 @@ Then('I should see the subscription type under my email') do
   page.should have_content(@user_subscription_type)
 end
 
-Given('I fill the registration form and don’t select a subscription') do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Given('email is “example@place.org”') do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Given('email is “example@place.com”') do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
 Then('I should see the error message {string}') do |error_message|
   page.should have_content(error_message)
 end
