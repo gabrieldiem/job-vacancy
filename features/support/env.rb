@@ -5,6 +5,17 @@ require 'rspec/expectations'
 
 require 'simplecov'
 
+require 'rspec/mocks'
+World(RSpec::Mocks::ExampleMethods)
+
+Before do
+  RSpec::Mocks.setup
+end
+
+After do
+  RSpec::Mocks.teardown
+end
+
 SimpleCov.start do
   root(File.join(File.dirname(__FILE__), '..', '..'))
   coverage_dir 'reports/coverage'
