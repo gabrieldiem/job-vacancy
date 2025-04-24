@@ -60,7 +60,7 @@ class User
     return if @birthdate.nil?
 
     begin
-      @birthdate = Date.parse(@birthdate || '2000/12/12')
+      @birthdate = Date.strptime(@birthdate || '2000/12/12', '%Y/%m/%d')
     rescue Date::Error
       errors.add(:birthdate, 'invalid date format')
       return
