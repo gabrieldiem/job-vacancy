@@ -40,7 +40,7 @@ class User
     @email = data[:email]
     @updated_on = data[:updated_on]
     @created_on = data[:created_on]
-    @birthdate = Date.strptime(data[:birthdate] || '2000/12/12', '%Y/%m/%d')
+    @birthdate = data[:birthdate]
     @current_date = current_date
   end
 
@@ -58,6 +58,13 @@ class User
 
   def validate_birthdate
     return if @birthdate.nil?
+
+    begin
+      @birthdate = Date.parse(@birthdate || '2000/12/12')
+    rescue Date::Error
+      errors.add(:birthdate, 'invalid date format')
+      return
+    end
 
     errors.add(:birthdate, 'date must be in the past') if @birthdate > @current_date
 
