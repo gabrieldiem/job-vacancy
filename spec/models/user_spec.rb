@@ -92,13 +92,6 @@ describe User do
                                  birthdate: Date.new(1869, 10, 8), current_date: Date.new(2021, 10, 8))
       expect(user.valid?).to eq false
     end
-
-    xit 'should be valid format' do
-      user = described_class.new(name: 'John Doe', email: 'john@doe.com',
-                                 crypted_password: 'a_secure_passWord!',
-                                 birthdate: 'january first, 2001', current_date: Date.new(2021, 10, 8))
-      expect(user.valid?).to eq false
-    end
   end
 
   it 'User with OnDemandSubscription and 1 active offer has a bill of 10.0' do

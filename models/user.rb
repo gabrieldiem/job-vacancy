@@ -8,13 +8,17 @@ class User
   MIN_AGE = 18
   MAX_AGE = 150
 
+  DATE_MUST_BE_PAST_MESSAGE = 'date must be in the past'.freeze
+  OVER_18_MESSAGE = 'must be over 18 to register'.freeze
+  BIRTHDATE_INVALID_MESSAGE = 'birth date invalid'.freeze
+
   validate :validate_birthdate_rules
   validates :name, :crypted_password, presence: true
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX,
                                               message: 'invalid' }
 
   def initialize(data = {})
-    assign_basic_attributes(data, data[:current_date] || Date.today)
+    assign_basic_attributes(data)
     assign_subscription(data)
     assign_password(data)
   end
@@ -33,14 +37,14 @@ class User
 
   private
 
-  def assign_basic_attributes(data, current_date = Date.today)
+  def assign_basic_attributes(data)
     @id = data[:id]
     @name = data[:name]
     @email = data[:email]
     @updated_on = data[:updated_on]
     @created_on = data[:created_on]
     @birthdate = data[:birthdate]
-    @current_date = current_date
+    @current_date = CurrentDateProvider.new(data[:current_date]).today
   end
 
   def assign_subscription(data)
@@ -55,12 +59,22 @@ class User
                         end
   end
 
+  def calculate_age(birthdate, current_date)
+    age = current_date.year - birthdate.year
+    if (birthdate.month < current_date.month) ||
+       (birthdate.month == current_date.month && birthdate.day < current_date.day)
+      age -= 1
+    end
+    age
+  end
+
   def validate_birthdate_rules
     return if @birthdate.nil?
-    errors.add(:birthdate, 'date must be in the past') if @birthdate > @current_date
 
-    age = ((@current_date - @birthdate).to_i / 365.25).floor
-    errors.add(:birthdate, 'must be over 18 to register') if age < MIN_AGE
-    errors.add(:birthdate, 'birth date invalid') if age > MAX_AGE
+    errors.add(:birthdate, DATE_MUST_BE_PAST_MESSAGE) if @birthdate > @current_date
+
+    age = calculate_age(@birthdate, @current_date)
+    errors.add(:birthdate, OVER_18_MESSAGE) if age < MIN_AGE
+    errors.add(:birthdate, BIRTHDATE_INVALID_MESSAGE) if age > MAX_AGE
   end
 end
