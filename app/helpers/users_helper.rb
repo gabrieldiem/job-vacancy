@@ -7,12 +7,4 @@ JobVacancy::App.helpers do
         SUBSCRIPTION_TYPE_NON_PROFIT_ORGANIZATION => 'Non-commercial organization' }
     types[subscription_type]
   end
-
-  def date_format
-    'Y/m/d'.freeze
-  end
-
-  def max_date
-    'today'.freeze
-  end
 end

@@ -2,13 +2,10 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         flatpickr("#birthdate", {
-            dateFormat: <%= date_format %> ,
-            maxDate:  <%= max_date %>
+            dateFormat: 'Y/m/d'
         });
     });
 </script>
-
-
 
 <h1>Registration</h1>
 <% form_for(@user, '/users/create') do |f| %> <%= f.label :name %>

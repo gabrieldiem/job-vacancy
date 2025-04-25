@@ -71,7 +71,10 @@ class User
   def validate_birthdate_rules
     return if @birthdate.nil?
 
-    errors.add(:birthdate, DATE_MUST_BE_PAST_MESSAGE) if @birthdate > @current_date
+    if @birthdate > @current_date
+      errors.add(:birthdate, DATE_MUST_BE_PAST_MESSAGE)
+      return
+    end
 
     age = calculate_age(@birthdate, @current_date)
     errors.add(:birthdate, OVER_18_MESSAGE) if age < MIN_AGE
