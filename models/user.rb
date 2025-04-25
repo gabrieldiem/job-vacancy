@@ -1,4 +1,5 @@
 require_relative './subscriptions/subscription_factory'
+require_relative './current_date_provider'
 
 class User
   include ActiveModel::Validations
