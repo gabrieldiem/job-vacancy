@@ -25,7 +25,7 @@ Feature: Birthdate Registration
 
     Scenario: US-1.5 Cannot register with a birthdate over 150 years old
         Given I register with a birthdate of "1412/04/21"
-        Then I should see the error message "birth date invalid"
+        Then I should see the error message "Birthdate invalid"
 
     Scenario: US-1.6 Cannot register with an incorrectly formatted birthdate
         Given I register with a birthdate of "january first, 2001"

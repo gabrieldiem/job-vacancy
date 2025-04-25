@@ -11,7 +11,7 @@ class User
 
   DATE_MUST_BE_PAST_MESSAGE = 'date must be in the past'.freeze
   OVER_18_MESSAGE = 'must be over 18 to register'.freeze
-  BIRTHDATE_INVALID_MESSAGE = 'birth date invalid'.freeze
+  BIRTHDATE_INVALID_MESSAGE = 'invalid'.freeze
 
   validate :validate_birthdate_rules
   validates :name, :crypted_password, presence: true
