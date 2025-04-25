@@ -14,9 +14,13 @@ Given('I fill the registration form and I select the subscription type {string} 
   @user_password = 'abc'
   @user_subscription_type = subscription_type
 
+  @current_date = Date.strptime('2025/10/25', '%Y/%m/%d')
+  allow(Date).to receive(:today).and_return(@current_date)
+
   fill_in('user[name]', with: 'Pepe')
   fill_in('user[email]', with: @user_email)
   fill_in('user[password]', with: @user_password)
+  fill_in('user[birthdate]', with: '1990/10/25')
   fill_in('user[password_confirmation]', with: @user_password)
   select @user_subscription_type, from: 'user[subscription_type]'
 end
@@ -47,7 +51,8 @@ Given('I have a {string} subscription with email {string}') do |subscription_typ
 
   @user_email = email
   @user_password = 'somePassword'
-  @user = User.new(name: email, email:, password: @user_password, subscription_type:)
+  @user = User.new(name: email, email:, password: @user_password, subscription_type:, birthdate: '1990/10/25',
+                   current_date: Date.new(2025, 10, 1))
   UserRepository.new.save(@user)
 end
 

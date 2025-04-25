@@ -9,6 +9,12 @@ class UserRepository < BaseRepository
 
   protected
 
+  def load_object(a_record)
+    user = super
+    user.birthdate = user.birthdate.strftime('%Y/%m/%d') unless user.birthdate.nil?
+    user
+  end
+
   def changeset(user)
     {
       name: user.name,

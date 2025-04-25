@@ -40,4 +40,17 @@ describe UserRepository do
     found_user = repository.find_by_email(joe_user.email)
     expect(found_user.billed_amount(offers)).to eq 0.0
   end
+
+  it 'User repository saves and returns correctly an user with its birthdate' do
+    joe_user = User.new(name: 'Joe',
+                        email: 'joe@doe.org',
+                        crypted_password: 'secure_pwd',
+                        subscription_type: non_profit_subscription,
+                        current_date: Date.new(2025, 10, 1),
+                        birthdate: '1990/10/25')
+    repository.save(joe_user)
+
+    found_user = repository.find_by_email(joe_user.email)
+    expect(found_user.birthdate).to eq '1990/10/25'
+  end
 end

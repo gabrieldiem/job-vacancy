@@ -15,7 +15,6 @@ class User
                                               message: 'invalid' }
 
   def initialize(data = {})
-    data[:birthdate] = data[:birthdate] || '2000/01/01'
     assign_basic_attributes(data, data[:current_date] || Date.today)
     assign_subscription(data)
     assign_password(data)
@@ -58,6 +57,7 @@ class User
   end
 
   def validate_birthdate_format
+    return if @birthdate.nil?
     return errors.add(:birthdate, 'can\'t be blank') if @birthdate == ''
 
     begin
@@ -70,7 +70,7 @@ class User
   end
 
   def validate_birthdate_rules
-    return if birthdate.nil? || birthdate == ''
+    return if @birthdate.nil? || @birthdate == ''
 
     errors.add(:birthdate, 'date must be in the past') if @birthdate > @current_date
 
