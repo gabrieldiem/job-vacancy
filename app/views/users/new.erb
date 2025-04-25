@@ -6,6 +6,7 @@
   <%= errors_for(@errors, :email) %>
   <%= f.label :birthdate %>
   <%= f.text_field :birthdate, id: 'birthdate' %>
+  <%= errors_for(@errors, :birthdate) %>
   <%= f.label :subscription_type, :caption => "Subscription:" %>
   <%= f.select :subscription_type, :options => [[get_subscription_name(SUBSCRIPTION_TYPE_ON_DEMAND), SUBSCRIPTION_TYPE_ON_DEMAND ], [get_subscription_name(SUBSCRIPTION_TYPE_NON_PROFIT_ORGANIZATION),SUBSCRIPTION_TYPE_NON_PROFIT_ORGANIZATION]]  %>
   <%= errors_for(@errors, :subscription_type) %>

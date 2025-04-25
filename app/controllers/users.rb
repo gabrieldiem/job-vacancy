@@ -6,6 +6,8 @@ JobVacancy::App.controllers :users do
 
   post :create do
     params[:user][:subscription_type] = params[:user][:subscription_type].to_i
+    params[:user][:birthdate] = BirthdateParser.new(params[:user][:birthdate]).birthdate
+
     password_confirmation = params[:user][:password_confirmation]
     params[:user].reject! { |k, _| k == 'password_confirmation' }
 

@@ -1,3 +1,5 @@
+require 'date'
+
 class UserRepository < BaseRepository
   self.table_name = :users
   self.model_class = 'User'
@@ -8,12 +10,6 @@ class UserRepository < BaseRepository
   end
 
   protected
-
-  def load_object(a_record)
-    user = super
-    user.birthdate = user.birthdate.strftime('%Y/%m/%d') unless user.birthdate.nil?
-    user
-  end
 
   def changeset(user)
     {

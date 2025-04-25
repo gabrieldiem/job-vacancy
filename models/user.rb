@@ -8,7 +8,6 @@ class User
   MIN_AGE = 18
   MAX_AGE = 150
 
-  validate :validate_birthdate_format
   validate :validate_birthdate_rules
   validates :name, :crypted_password, presence: true
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX,
@@ -56,22 +55,8 @@ class User
                         end
   end
 
-  def validate_birthdate_format
-    return if @birthdate.nil?
-    return errors.add(:birthdate, 'can\'t be blank') if @birthdate == ''
-
-    begin
-      @birthdate = Date.strptime(@birthdate, '%Y/%m/%d')
-    rescue Date::Error
-      errors.add(:birthdate, 'invalid date format')
-      @birthdate = nil
-      nil
-    end
-  end
-
   def validate_birthdate_rules
-    return if @birthdate.nil? || @birthdate == ''
-
+    return if @birthdate.nil?
     errors.add(:birthdate, 'date must be in the past') if @birthdate > @current_date
 
     age = ((@current_date - @birthdate).to_i / 365.25).floor

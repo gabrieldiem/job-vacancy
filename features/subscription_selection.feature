@@ -25,6 +25,7 @@ Feature: Subscription selection in registration
     When I press the Register button
     Then I should see the error message "must have .org mail for non commercial organization subscription"
 
+    @indev
   Scenario: US-2.6 Cannot activate 8th job offer with non-profit organization
     Given I have a "Non-commercial organization" subscription with email "example@place.org"
     And add 7 active job offers

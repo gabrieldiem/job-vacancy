@@ -51,7 +51,7 @@ Given('I have a {string} subscription with email {string}') do |subscription_typ
 
   @user_email = email
   @user_password = 'somePassword'
-  @user = User.new(name: email, email:, password: @user_password, subscription_type:, birthdate: '1990/10/25',
+  @user = User.new(name: email, email:, password: @user_password, subscription_type:, birthdate: Date.new(1990, 10, 25),
                    current_date: Date.new(2025, 10, 1))
   UserRepository.new.save(@user)
 end
