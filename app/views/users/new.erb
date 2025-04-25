@@ -1,3 +1,15 @@
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        flatpickr("#birthdate", {
+            dateFormat: <%= date_format %> ,
+            maxDate:  <%= max_date %>
+        });
+    });
+</script>
+
+
+
 <h1>Registration</h1>
 <% form_for(@user, '/users/create') do |f| %> <%= f.label :name %>
 	<%= f.text_field :name %>
@@ -17,14 +29,3 @@
   <br/>
   <%= f.submit "Create", :class => "btn btn-primary" %>
 <% end %>
-
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    flatpickr("#birthdate", {
-      dateFormat: "Y/m/d",
-      maxDate: "today"
-    });
-  });
-</script>
-
