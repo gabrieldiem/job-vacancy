@@ -3,10 +3,6 @@ Given('the current date is {string}') do |date_string|
   allow(Date).to receive(:today).and_return(@current_date)
 end
 
-Given('the format is YYYY\/MM\/DD') do
-  @date_format = '%Y/%m/%d'
-end
-
 Given('I register with a birthdate of {string}') do |date|
   visit '/register'
 

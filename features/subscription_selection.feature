@@ -7,7 +7,6 @@ Feature: Subscription selection in registration
     Given I am in the register page
 
   Scenario: US-2.1 Show all subscription types
-    Given I press the button to see the subscription types
     Then I should be able to see all of the subscription types available
 
   Scenario: US-2.2 Successful registration with subscription On Demand

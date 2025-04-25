@@ -5,7 +5,6 @@ Feature: Birthdate Registration
 
     Background:
         Given the current date is "2010/01/01"
-        And the format is YYYY/MM/DD
 
     Scenario: US-1.1 Successful registration with valid birthdate (26 yo)
         Given I register with a birthdate of "1984/04/21"

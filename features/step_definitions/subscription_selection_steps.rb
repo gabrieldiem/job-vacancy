@@ -2,9 +2,6 @@ Given('I am in the register page') do
   visit '/register'
 end
 
-Given('I press the button to see the subscription types') do
-end
-
 Then('I should be able to see all of the subscription types available') do
   expect(page).to have_select('user[subscription_type]', options: ['On demand', 'Non-commercial organization'])
 end
