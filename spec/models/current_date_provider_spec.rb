@@ -6,4 +6,10 @@ describe CurrentDateProvider do
 
     expect(described_class.new(date).today).to eq(date)
   end
+
+  it 'Today is today (Groundhog Day)' do
+    date = Date.today
+
+    expect(described_class.new(date).today).to eq(date)
+  end
 end
