@@ -36,7 +36,7 @@ describe Favorite do
                       birthdate: Date.new(2000, 10, 8), current_date: Date.new(2021, 10, 8), id: 99)
 
       job_offer = JobOffer.new(title: 'a title', salary: 10, user_id: 99)
-      check_validation(:user, "User can't be the same as job offer owner") do
+      check_validation(:user, "User can't be the same as the job offer owner") do
         described_class.new(user:, job_offer:)
       end
     end

@@ -15,7 +15,7 @@ Feature: Mark job offers as favourites
     When I visit the job offers page
     And I click the button to mark as favourite
     Then I see the message "Job offer unmarked as favorite"
-@wip
+
   Scenario: US-6.3 Cannot mark my own job offer as favorite
     Given I am logged in as a job offerer
     When I visit the job offers page

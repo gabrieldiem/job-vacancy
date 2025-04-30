@@ -51,15 +51,20 @@ When('I click the button to mark as favourite') do
 end
 
 Given('I am logged in as a job offerer') do
-  pending # Write code here that turns the phrase above into concrete actions
+  visit '/login'
+  fill_in('user[email]', with: 'applicant@gmail.org')
+  fill_in('user[password]', with: 'password1234')
+  click_button('Login')
 end
 
 When('I click the button to mark as favourite on my own job offer') do
-  pending # Write code here that turns the phrase above into concrete actions
+  within(:xpath, "//tr[td[contains(text(), 'Frontend Developer')]]") do
+    find("a[name='Favorite']").click
+  end
 end
 
-Then('I should not see the message {string}') do |_string|
-  pending # Write code here that turns the phrase above into concrete actions
+Then('I should not see the message {string}') do |message|
+  page.should_not have_content(message)
 end
 
 Given('I am not logged in') do

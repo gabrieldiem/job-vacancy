@@ -12,11 +12,21 @@ JobVacancy::App.helpers do
   end
 
   def is_favorite?(offer)
-    return false unless @current_user
+    return false if session[:current_user].nil?
 
-    return false unless current_user
+    user = UserRepository.new.find(session[:current_user])
+    return false if user.nil?
 
-    favorite = FavoriteRepository.new.find_by_user_and_job_offer(current_user, offer)
+    favorite = FavoriteRepository.new.find_by_user_and_job_offer(user, offer)
     !favorite.nil?
+  end
+
+  def is_same_owner?(offer)
+    return false if session[:current_user].nil?
+
+    user = UserRepository.new.find(session[:current_user])
+    return false if user.nil?
+
+    user.id == offer.user_id
   end
 end

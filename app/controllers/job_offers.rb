@@ -37,6 +37,7 @@ JobVacancy::App.controllers :job_offers do
   get :mark_as_favorite, with: :offer_id do
     @job_offer = JobOfferRepository.new.find(params[:offer_id])
     favorite = FavoriteRepository.new.find_by_user_and_job_offer(current_user, @job_offer)
+
     if favorite.nil?
       favorite = Favorite.new(user: current_user, job_offer: @job_offer)
       if FavoriteRepository.new.save(favorite)
@@ -49,6 +50,16 @@ JobVacancy::App.controllers :job_offers do
     else
       flash.now[:error] = 'Operation failed'
     end
+
+    redirect '/job_offers/latest'
+
+  rescue ActiveModel::ValidationError => e
+    @errors = e.model.errors
+
+    @errors.each do |error|
+      flash[:error] = error.full_message
+    end
+
     redirect '/job_offers/latest'
   end
 

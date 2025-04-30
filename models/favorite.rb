@@ -31,6 +31,6 @@ class Favorite
   def user_cannot_be_job_offer_owner
     return if user.nil? || job_offer.nil?
 
-    errors.add(:user, "can't be the same as job offer owner") if user.id == job_offer.user_id
+    errors.add(:user, "can't be the same as the job offer owner") if user.id == job_offer.user_id
   end
 end
