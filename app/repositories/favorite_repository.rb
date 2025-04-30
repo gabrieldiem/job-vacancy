@@ -11,15 +11,15 @@ class FavoriteRepository < BaseRepository
 
   def load_object(a_record)
     favorite = super
-    favorite.user = UserRepository.new.find(favorite.user)
-    favorite.job_offer = JobOfferRepository.new.find(favorite.job_offer)
+    favorite.user = UserRepository.new.find(favorite.user_id)
+    favorite.job_offer = JobOfferRepository.new.find(favorite.job_offer_id)
     favorite
   end
 
   def changeset(favorite)
     {
-      user: favorite.user.id,
-      job_offer: favorite.job_offer.id
+      user_id: favorite.user.id,
+      job_offer_id: favorite.job_offer.id
     }
   end
 end
