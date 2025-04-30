@@ -14,7 +14,9 @@
     <th>Description</th>
     <th>Salary</th>
 		<th>Actions</th>
-    <th>Favorites</th>
+		<% unless session[:current_user].nil? %>
+			<th>Favorites</th>
+		<% end %>
 	</tr>
 	<% @offers.each do | offer| %>
 
@@ -34,11 +36,13 @@
 		<td>
 			<%= link_to 'Apply', url_for(:job_offers, :apply, :offer_id => offer.id), :class => "btn btn-primary" %>
 		</td>
-    <td>
-      <%= link_to '❤', is_same_owner?(offer) ? url_for("#") : url_for(:job_offers, :mark_as_favorite, :offer_id => offer.id),
-                  :class => "btn #{is_favorite?(offer) ? " btn-danger" : "btn-primary"} #{is_same_owner?(offer) ? "disabled" : ""}", :alt => "Favorite",
-                  :name => "Favorite" %>
-    </td>
+		<% unless session[:current_user].nil? %>
+  		<td>
+				<%= link_to '❤', is_same_owner?(offer) ? url_for("#") : url_for(:job_offers, :mark_as_favorite, :offer_id => offer.id),
+										:class => "btn #{is_favorite?(offer) ? " btn-danger" : "btn-primary"} #{is_same_owner?(offer) ? "disabled" : ""}", :alt => "Favorite",
+										:name => "Favorite" %>
+			</td>
+		<% end %>
 	</tr>
 
   <% end %>

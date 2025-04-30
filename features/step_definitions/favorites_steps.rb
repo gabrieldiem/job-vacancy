@@ -68,11 +68,12 @@ Then('I should not see the message {string}') do |message|
 end
 
 Given('I am not logged in') do
-  pending # Write code here that turns the phrase above into concrete actions
+  visit '/logout'
 end
 
 Then('I do not see the button to mark as favourite for the offers') do
-  pending # Write code here that turns the phrase above into concrete actions
+  visit '/job_offers'
+  page.should_not have_content('Favorites')
 end
 
 Given('I have marked one job offer as favorite') do

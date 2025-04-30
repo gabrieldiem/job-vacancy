@@ -21,7 +21,7 @@ Feature: Mark job offers as favourites
     When I visit the job offers page
     And I click the button to mark as favourite on my own job offer
     Then I should not see the message "Job offer marked as favorite"
-@wip
+  
   Scenario: US-6.4 Cannot see the button to mark as favourite if not logged in
     Given I am not logged in
     When I visit the job offers page
