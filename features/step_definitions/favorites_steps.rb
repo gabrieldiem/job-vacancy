@@ -1,12 +1,32 @@
 Given('a job offer exists created by a job offerer') do
-  pending # Write code here that turns the phrase above into concrete actions
+  @user_repository = UserRepository.new
+
+  @user_password = 'somePassword'
+  @user_offerer = User.new(name: 'user', email: 'user@gmail.org', password: @user_offerer_password,
+                           subscription_type: SUBSCRIPTION_TYPE_ON_DEMAND, birthdate: Date.new(1990, 10, 25),
+                           current_date: Date.new(2025, 10, 1))
+  @user_repository.save(@user_offerer)
+  @job_offer = JobOffer.new(title: 'Software Engineer', user_id: @user_offerer.id, salary: 0, is_active: true)
+  JobOfferRepository.new.save(@job_offer)
 end
 
 Given('I am logged in as a registered user') do
-  pending # Write code here that turns the phrase above into concrete actions
+  @user_applicant = User.new(name: 'applicant', email: 'applicant@gmail.org', password: 'password1234',
+                             subscription_type: SUBSCRIPTION_TYPE_ON_DEMAND, birthdate: Date.new(1990, 10, 25),
+                             current_date: Date.new(2025, 10, 1))
+  @user_repository.save(@user_applicant)
+  visit '/login'
+  fill_in('user[email]', with: 'applicant@gmail.org')
+  fill_in('user[password]', with: 'password1234')
+  click_button('Login')
 end
 
 Given('I have active job offers') do
+  @job_offer = JobOffer.new(title: 'Frontend Developer', user_id: @user_applicant.id, salary: 0, is_active: true)
+  JobOfferRepository.new.save(@job_offer)
+end
+
+Given('I have marked the job offer {string} as favorite') do |_string|
   pending # Write code here that turns the phrase above into concrete actions
 end
 
