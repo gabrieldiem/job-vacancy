@@ -24,4 +24,21 @@ describe FavoriteRepository do
     expect(favorite_found.user.id).to eq favorite.user.id
     expect(favorite_found.job_offer.id).to eq favorite.job_offer.id
   end
+
+  it 'Can delete a favorite in FavoriteRepository' do
+    job_offer_repo = JobOfferRepository.new
+
+    an_offer = JobOffer.new(title: 'a title', salary: 0, user_id: owner.id)
+    job_offer_repo.save(an_offer)
+    an_offer = job_offer_repo.find_by_owner(owner).first
+
+    favorite = Favorite.new(user: owner, job_offer: an_offer)
+    repository.save(favorite)
+
+    repository.delete(favorite)
+
+    favorite_found = repository.find_by_user_and_job_offer(owner, an_offer)
+
+    expect(favorite_found).to eq nil
+  end
 end
