@@ -19,5 +19,15 @@ describe Favorite do
         described_class.new(user:)
       end
     end
+
+    it 'the favorite should be valid' do
+      user = User.new(name: 'John Doe', email: 'john@doe.com',
+                      crypted_password: 'a_secure_passWord!',
+                      birthdate: Date.new(2000, 10, 8), current_date: Date.new(2021, 10, 8))
+
+      job_offer = JobOffer.new(title: 'a title', salary: 10)
+      favorite = described_class.new(user:, job_offer:)
+      expect(favorite).to be_valid
+    end
   end
 end
