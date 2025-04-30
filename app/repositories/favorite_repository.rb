@@ -3,7 +3,7 @@ class FavoriteRepository < BaseRepository
   self.model_class = 'Favorite'
 
   def find_by_user_and_job_offer(user, job_offer)
-    row = dataset.first(user: user.id, job_offer: job_offer.id)
+    row = dataset.first(user_id: user.id, job_offer_id: job_offer.id)
     load_object(row) unless row.nil?
   end
 

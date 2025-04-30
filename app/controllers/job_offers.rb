@@ -35,7 +35,7 @@ JobVacancy::App.controllers :job_offers do
   end
 
   get :mark_as_favorite, with: :offer_id do
-    @job_offer = JobOfferForm.from(JobOfferRepository.new.find(params[:offer_id]))
+    @job_offer = JobOfferRepository.new.find(params[:offer_id])
     favorite = FavoriteRepository.new.find_by_user_and_job_offer(current_user, @job_offer)
     if favorite.nil?
       favorite = Favorite.new(user: current_user, job_offer: @job_offer)
