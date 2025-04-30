@@ -2,11 +2,21 @@ require 'spec_helper'
 
 describe Favorite do
   describe 'valid' do
-    it 'should be have user' do
+    it 'the user should not be blank' do
       job_offer = JobOffer.new(title: 'a title', salary: 10)
 
       check_validation(:user, "User can't be blank") do
         described_class.new(job_offer:)
+      end
+    end
+
+    it 'the job offer should not be blank' do
+      user = User.new(name: 'John Doe', email: 'john@doe.com',
+                      crypted_password: 'a_secure_passWord!',
+                      birthdate: Date.new(2000, 10, 8), current_date: Date.new(2021, 10, 8))
+
+      check_validation(:job_offer, "Job offer can't be blank") do
+        described_class.new(user:)
       end
     end
   end

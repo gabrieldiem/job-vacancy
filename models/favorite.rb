@@ -4,6 +4,7 @@ class Favorite
   attr_accessor :user, :job_offer
 
   validates :user, presence: true
+  validates :job_offer, presence: true
 
   def initialize(data = {})
     @user = data[:user]
