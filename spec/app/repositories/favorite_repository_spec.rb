@@ -41,4 +41,21 @@ describe FavoriteRepository do
 
     expect(favorite_found).to eq nil
   end
+
+  it 'When i delete a Job Offer then the favorite must be deleted' do
+    job_offer_repo = JobOfferRepository.new
+
+    an_offer = JobOffer.new(title: 'a title', salary: 0, user_id: owner.id)
+    job_offer_repo.save(an_offer)
+    an_offer = job_offer_repo.find_by_owner(owner).first
+
+    favorite = Favorite.new(user: owner, job_offer: an_offer)
+    repository.save(favorite)
+
+    job_offer_repo.delete(an_offer)
+
+    favorite_found = repository.find_by_user_and_job_offer(owner, an_offer)
+
+    expect(favorite_found).to eq nil
+  end
 end
