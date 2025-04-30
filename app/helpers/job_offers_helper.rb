@@ -10,4 +10,13 @@ JobVacancy::App.helpers do
   def print_salary(offer)
     offer.is_salary_specified? ? offer.salary : NOT_SPECIFIED_SALARY_MESSAGE
   end
+
+  def is_favorite?(offer)
+    return false unless @current_user
+
+    return false unless current_user
+
+    favorite = FavoriteRepository.new.find_by_user_and_job_offer(current_user, offer)
+    !favorite.nil?
+  end
 end

@@ -32,26 +32,22 @@ When('I visit the job offers page') do
   visit '/job_offers'
 end
 
-When('I click the button to mark as favourite for the job offer {string}') do |job_offer_title|
-  within(:xpath, "//tr[td[contains(text(), '#{job_offer_title}')]]") do
-    find("a[name='Favorite']").click
-  end
-end
-
 Then('I see the message {string}') do |message|
   page.should have_content(message)
 end
 
-Given('I have marked the job offer {string} as favorite') do |_string|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Given('I marked the job offer {string} as favorite') do |_string|
-  pending # Write code here that turns the phrase above into concrete actions
+Given('I marked the job offer {string} as favorite') do |title|
+  visit '/job_offers'
+  @title = title
+  within(:xpath, "//tr[td[contains(text(), '#{title}')]]") do
+    find("a[name='Favorite']").click
+  end
 end
 
 When('I click the button to mark as favourite') do
-  pending # Write code here that turns the phrase above into concrete actions
+  within(:xpath, "//tr[td[contains(text(), '#{@title}')]]") do
+    find("a[name='Favorite']").click
+  end
 end
 
 Given('I am logged in as a job offerer') do

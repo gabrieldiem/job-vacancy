@@ -5,12 +5,11 @@ Feature: Mark job offers as favourites
     And I am logged in as a registered user
     And I have active job offers
 
-@indev
   Scenario: US-6.1 Mark a job offer as favorite
     When I visit the job offers page
-    And I click the button to mark as favourite for the job offer "Software Engineer"
-    Then I see the message "Job offer marked as favourite"
-@wip
+    And I marked the job offer "Software Engineer" as favorite
+    Then I see the message "Job offer marked as favorite"
+
   Scenario: US-6.2 Unmark a job offer as favorite
     Given I marked the job offer "Software Engineer" as favorite
     When I visit the job offers page

@@ -36,7 +36,19 @@ JobVacancy::App.controllers :job_offers do
 
   get :mark_as_favorite, with: :offer_id do
     @job_offer = JobOfferForm.from(JobOfferRepository.new.find(params[:offer_id]))
-    flash[:success] = 'Job offer marked as favourite'
+    favorite = FavoriteRepository.new.find_by_user_and_job_offer(current_user, @job_offer)
+    if favorite.nil?
+      favorite = Favorite.new(user: current_user, job_offer: @job_offer)
+      if FavoriteRepository.new.save(favorite)
+        flash[:success] = 'Job offer marked as favorite'
+      else
+        flash.now[:error] = 'Operation failed'
+      end
+    elsif FavoriteRepository.new.destroy(favorite)
+      flash[:success] = 'Job offer unmarked as favorite'
+    else
+      flash.now[:error] = 'Operation failed'
+    end
     redirect '/job_offers/latest'
   end
 

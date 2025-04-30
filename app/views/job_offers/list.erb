@@ -35,7 +35,7 @@
 			<%= link_to 'Apply', url_for(:job_offers, :apply, :offer_id => offer.id), :class => "btn btn-primary" %>
 		</td>
     <td>
-      <%= link_to '❤', url_for(:job_offers, :mark_as_favorite, :offer_id => offer.id), :class => "btn btn-primary", :alt => "Favorite", :name => "Favorite" %>
+      <%= link_to '❤', url_for(:job_offers, :mark_as_favorite, :offer_id => offer.id), :class => "btn #{is_favorite?(offer) ? "btn-danger" : "btn-primary"}", :alt => "Favorite", :name => "Favorite" %>
     </td>
 	</tr>
 
