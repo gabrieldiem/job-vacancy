@@ -5,6 +5,7 @@ Feature: Mark job offers as favourites
     And I am logged in as a registered user
     And I have active job offers
 
+@indev
   Scenario: US-6.1 Mark a job offer as favorite
     When I visit the job offers page
     And I click the button to mark as favourite for the job offer "Software Engineer"

@@ -1,13 +1,15 @@
 Given('a job offer exists created by a job offerer') do
   @user_repository = UserRepository.new
+  @job_offer_repository = JobOfferRepository.new
 
   @user_password = 'somePassword'
-  @user_offerer = User.new(name: 'user', email: 'user@gmail.org', password: @user_offerer_password,
+  @user_offerer = User.new(name: 'user', email: 'user@gmail.org', password: @user_password,
                            subscription_type: SUBSCRIPTION_TYPE_ON_DEMAND, birthdate: Date.new(1990, 10, 25),
                            current_date: Date.new(2025, 10, 1))
   @user_repository.save(@user_offerer)
+
   @job_offer = JobOffer.new(title: 'Software Engineer', user_id: @user_offerer.id, salary: 0, is_active: true)
-  JobOfferRepository.new.save(@job_offer)
+  @job_offer_repository.save(@job_offer)
 end
 
 Given('I am logged in as a registered user') do
@@ -23,22 +25,24 @@ end
 
 Given('I have active job offers') do
   @job_offer = JobOffer.new(title: 'Frontend Developer', user_id: @user_applicant.id, salary: 0, is_active: true)
-  JobOfferRepository.new.save(@job_offer)
-end
-
-Given('I have marked the job offer {string} as favorite') do |_string|
-  pending # Write code here that turns the phrase above into concrete actions
+  @job_offer_repository.save(@job_offer)
 end
 
 When('I visit the job offers page') do
-  pending # Write code here that turns the phrase above into concrete actions
+  visit '/job_offers'
 end
 
-When('I click the button to mark as favourite for the job offer {string}') do |_string|
-  pending # Write code here that turns the phrase above into concrete actions
+When('I click the button to mark as favourite for the job offer {string}') do |job_offer_title|
+  within(:xpath, "//tr[td[contains(text(), '#{job_offer_title}')]]") do
+    find("a[name='Favorite']").click
+  end
 end
 
-Then('I see the message {string}') do |_string|
+Then('I see the message {string}') do |message|
+  page.should have_content(message)
+end
+
+Given('I have marked the job offer {string} as favorite') do |_string|
   pending # Write code here that turns the phrase above into concrete actions
 end
 

@@ -34,6 +34,12 @@ JobVacancy::App.controllers :job_offers do
     render 'job_offers/apply'
   end
 
+  get :mark_as_favorite, with: :offer_id do
+    @job_offer = JobOfferForm.from(JobOfferRepository.new.find(params[:offer_id]))
+    flash[:success] = 'Job offer marked as favourite'
+    redirect '/job_offers/latest'
+  end
+
   post :search do
     @offers = JobOfferRepository.new.search_by_title(params[:q])
     render 'job_offers/list'
