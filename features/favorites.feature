@@ -28,7 +28,7 @@ Feature: Mark job offers as favourites
     Then I do not see the button to mark as favourite for the offers
 @wip
   Scenario: US-6.5 Unmarked as favourite all job offers
-    Given I have marked one job offer as favorite
+    Given I marked the job offer "Software Engineer" as favorite
     When I visit the job offers page
     And I click the "Unfavorite All" button
     Then I see the message "All favorites removed"
