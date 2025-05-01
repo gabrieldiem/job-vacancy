@@ -88,15 +88,20 @@ Given('I am logged in a job offerer') do
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-Given('{int} users have marked my job offer as favorite') do |_int|
-  # Given('{float} users have marked my job offer as favorite') do |float|
-  pending # Write code here that turns the phrase above into concrete actions
+Given('{int} users have marked my job offer as favorite') do |number_of_favorites|
+  job_offer = @job_offer_repository.find_by_owner(@user_applicant).first
+  @favorites_repository = FavoriteRepository.new
+
+  number_of_favorites.times do
+    favorite = Favorite.new(user: @user_offerer, job_offer:)
+    @favorites_repository.save(favorite)
+  end
 end
 
 When('I visit my job offers page') do
-  pending # Write code here that turns the phrase above into concrete actions
+  visit '/job_offers/my'
 end
 
-Then('I see {string} for that job offer') do |_string|
-  pending # Write code here that turns the phrase above into concrete actions
+Then('I see {string} for that job offer') do |string_number_of_favorites|
+  page.should have_content(string_number_of_favorites)
 end

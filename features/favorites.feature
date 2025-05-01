@@ -32,9 +32,9 @@ Feature: Mark job offers as favourites
     When I visit the job offers page
     And I click the "Unfavorite All" button
     Then I see the message "All favorites removed"
-@wip
+
   Scenario: US-6.6 View the favorites count on my job offers
-    Given I am logged in a job offerer
+    Given I am logged in as a job offerer
     And 3 users have marked my job offer as favorite
     When I visit my job offers page
     Then I see "3 favorites" for that job offer

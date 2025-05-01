@@ -7,6 +7,10 @@ class FavoriteRepository < BaseRepository
     load_object(row) unless row.nil?
   end
 
+  def find_all_by_offer(job_offer)
+    load_collection dataset.where(job_offer_id: job_offer.id)
+  end
+
   protected
 
   def load_object(a_record)

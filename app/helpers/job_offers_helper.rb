@@ -29,4 +29,8 @@ JobVacancy::App.helpers do
 
     user.id == offer.user_id
   end
+
+  def get_number_of_favorites(offer)
+    FavoriteRepository.new.find_all_by_offer(offer).length
+  end
 end

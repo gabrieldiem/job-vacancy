@@ -5,7 +5,8 @@
 		<th>Location</th>
     <th>Description</th>
     <th>Salary</th>
-		<th>Is active</th>
+    <th>Favorites</th>
+    <th>Is active</th>
 		<th>Actions</th>
 	</tr>
 	<% @offers.each do | offer| %>
@@ -22,6 +23,10 @@
 		</td>
     <td>
       <%= print_salary(offer) %>
+    </td>
+    <td>
+      <% favorites = get_number_of_favorites(offer) %>
+      <%= "#{favorites} favorite#{favorites == 1 ? '' : 's'}" %>
     </td>
     <td>
 			<%= offer.is_active %>
