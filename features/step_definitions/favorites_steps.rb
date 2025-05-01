@@ -76,11 +76,11 @@ Then('I do not see the button to mark as favourite for the offers') do
   page.should_not have_content('Favorites')
 end
 
-Given('I have marked one job offer as favorite') do
-  pending # Write code here that turns the phrase above into concrete actions
+When('I click the Unfavorite All button') do
+  click_button('Unfavorite All') if page.has_button?('Unfavorite All')
 end
 
-When('I click the {string} button') do |_string|
+And('I do not see any job offers marked as favorite') do
   pending # Write code here that turns the phrase above into concrete actions
 end
 

@@ -63,6 +63,12 @@ JobVacancy::App.controllers :job_offers do
     redirect '/job_offers/latest'
   end
 
+  get :unfavorite_all do
+    flash[:success] = 'All job offers have been unmarked as favorite'
+
+    redirect '/job_offers/latest'
+  end
+
   post :search do
     @offers = JobOfferRepository.new.search_by_title(params[:q])
     render 'job_offers/list'

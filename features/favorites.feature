@@ -26,12 +26,14 @@ Feature: Mark job offers as favourites
     Given I am not logged in
     When I visit the job offers page
     Then I do not see the button to mark as favourite for the offers
-@wip
+
+  @wip
   Scenario: US-6.5 Unmarked as favourite all job offers
     Given I marked the job offer "Software Engineer" as favorite
     When I visit the job offers page
-    And I click the "Unfavorite All" button
+    And I click the Unfavorite All button
     Then I see the message "All favorites removed"
+    And I do not see any job offers marked as favorite
 
   Scenario: US-6.6 View the favorites count on my job offers
     Given I am logged in as a job offerer
