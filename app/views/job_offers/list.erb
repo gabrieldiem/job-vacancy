@@ -6,8 +6,10 @@
 		<input type="submit" value="search" id="search-button" class="btn btn-primary"/>
 	</form>
 	<div style="text-align: right;">
-		<button id="unfavorite-button" class="btn btn-primary" style="margin-bottom: 20px; width: auto;">Unfavorite All</button>
-	</div>
+        <%= link_to 'Unfavorite All', url_for(:job_offers, :unfavorite_all), 
+                    :class => "btn btn-primary", 
+                    :style => "margin-bottom: 20px; width: auto;"%>
+    </div>
 </div>
 
 <table class="table table-bordered">
