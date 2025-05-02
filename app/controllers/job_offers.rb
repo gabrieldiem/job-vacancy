@@ -64,8 +64,12 @@ JobVacancy::App.controllers :job_offers do
   end
 
   get :unfavorite_all do
-    flash[:success] = 'All job offers have been unmarked as favorite'
-
+    @favorites = FavoriteRepository.new
+    if @favorites.delete_all_by_user(current_user)
+      flash[:success] = 'All favorites removed'
+    else
+      flash.now[:error] = 'Operation failed'
+    end
     redirect '/job_offers/latest'
   end
 

@@ -11,6 +11,13 @@ class FavoriteRepository < BaseRepository
     load_collection dataset.where(job_offer_id: job_offer.id)
   end
 
+  def delete_all_by_user(user)
+    favorites = load_collection dataset.where(user_id: user.id)
+    favorites.each do |favorite|
+      destroy(favorite)
+    end
+  end
+
   protected
 
   def load_object(a_record)

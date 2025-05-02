@@ -93,4 +93,25 @@ describe FavoriteRepository do
 
     expect(favorite_found).to eq nil
   end
+
+  it 'Deletes all favorites of a user' do
+    user_repo = UserRepository.new
+    job_offer_repo = JobOfferRepository.new
+
+    other_user = User.new(name: 'Joe', email: 'joe@doe.com', crypted_password: 'secure_pwd')
+    user_repo.save(other_user)
+    offers = [JobOffer.new(title: 'a title', salary: 0, user_id: owner.id),
+              JobOffer.new(title: 'another title', salary: 0, user_id: owner.id)]
+    offers.each do |offer|
+      job_offer_repo.save(offer)
+      favorite = Favorite.new(user: other_user, job_offer: offer)
+      repository.save(favorite)
+    end
+
+    repository.delete_all_by_user(other_user)
+
+    offers.each do |offer|
+      expect(repository.find_by_user_and_job_offer(other_user, offer)).to eq nil
+    end
+  end
 end
