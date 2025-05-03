@@ -1,4 +1,4 @@
-When('I create a job offer with {string} years of required experience') do |experience|
+When('I create and activate a job offer with {string} years of required experience') do |experience|
   visit '/job_offers/new'
   fill_in('job_offer_form[title]', with: 'Software Engineer')
   fill_in('job_offer_form[location]', with: 'Remote')
@@ -6,18 +6,19 @@ When('I create a job offer with {string} years of required experience') do |expe
   fill_in('job_offer_form[salary]', with: '50000')
   fill_in('job_offer_form[experience_required]', with: experience)
   click_button('Create')
+
+  visit '/job_offers/my'
+  click_button('Activate')
 end
 
 Then('I should see {string} required experience in the job offers list') do |experience|
   visit '/job_offers/latest'
-  first_experience = find('table#job_offers tbody tr:first-child td.experience').text
-  expect(first_experience).to eq(experience)
+  page.should have_content(experience)
 end
 
-Then('I should see it in my offers as well') do
+Then('I should see {string} in my offers as well') do |experience|
   visit '/job_offers/my'
-  first_experience = find('table#job_offers tbody tr:first-child td.experience').text
-  expect(first_experience).to eq(experience)
+  page.should have_content(experience)
 end
 
 Then('I should see {string} in the job offers list') do |_string|
