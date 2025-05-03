@@ -23,11 +23,10 @@ Feature: Add experience required to job offer
     When I create a job offer without filling the required experience
     Then I should see the error "can't be blank"
 
-  @wip
   Scenario: US-3.5 Experience required can be edited
-    Given an existing job offer with 2 years of experience required
+    Given an existing job offer with "2" years of experience required
     When I edit the job offer and change the experience to "5" years
-    Then the job offer should now show "5 years"
+    Then I should see "5 years" in my offers
 
   @wip
   Scenario: US-3.6 Experience required cannot be negative
