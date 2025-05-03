@@ -27,7 +27,6 @@ Feature: Mark job offers as favourites
     When I visit the job offers page
     Then I do not see the button to mark as favourite for the offers
 
-  @wip
   Scenario: US-6.5 Unmarked as favourite all job offers
     Given I marked the job offer "Software Engineer" as favorite
     When I visit the job offers page

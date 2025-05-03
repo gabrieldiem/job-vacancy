@@ -77,11 +77,11 @@ Then('I do not see the button to mark as favourite for the offers') do
 end
 
 When('I click the Unfavorite All button') do
-  click_button('Unfavorite All') if page.has_button?('Unfavorite All')
+  click_on 'Unfavorite All'
 end
 
 And('I do not see any job offers marked as favorite') do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(page).to have_no_css('a.btn.btn-danger')
 end
 
 Given('I am logged in a job offerer') do
