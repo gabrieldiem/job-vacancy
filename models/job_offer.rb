@@ -9,7 +9,7 @@ class JobOffer
   MINIMUM_SALARY = 0
   MINIMUM_EXPERIENCE = 0
   SALARY_CANT_BE_BLANK_MESSAGE = "can't be blank".freeze
-  SALARY_CANT_BE_NEGATIVE_MESSAGE = "can't be negative".freeze
+  CANT_BE_NEGATIVE_MESSAGE = "can't be negative".freeze
   EXPERIENCE_CANT_BE_BLANK_MESSAGE = "can't be blank".freeze
 
   validates :title, presence: true
@@ -80,7 +80,7 @@ class JobOffer
   def is_salary_valid?
     errors.add(:salary, SALARY_CANT_BE_BLANK_MESSAGE) if @salary.blank? || @salary.nil?
 
-    errors.add(:salary, SALARY_CANT_BE_NEGATIVE_MESSAGE) if @salary.to_i < MINIMUM_SALARY
+    errors.add(:salary, CANT_BE_NEGATIVE_MESSAGE) if @salary.to_i < MINIMUM_SALARY
   end
 
   def is_experience_valid?
@@ -88,5 +88,7 @@ class JobOffer
       errors.add(:experience_required,
                  EXPERIENCE_CANT_BE_BLANK_MESSAGE)
     end
+
+    errors.add(:experience_required, CANT_BE_NEGATIVE_MESSAGE) if @experience_required.to_i < MINIMUM_EXPERIENCE
   end
 end

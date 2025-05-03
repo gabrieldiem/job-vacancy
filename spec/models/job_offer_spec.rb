@@ -30,6 +30,17 @@ describe JobOffer do
         described_class.new(title: 'a title', salary: 10)
       end
     end
+
+    it 'should be invalid when experience is negative' do
+      check_validation(:experience_required, "Experience required can't be negative") do
+        described_class.new(title: 'a title', salary: 10, experience_required: -1)
+      end
+    end
+
+    it 'should be valid when experience is greater than 0' do
+      job_offer = described_class.new(title: 'a title', salary: 10, experience_required: 5)
+      expect(job_offer).to be_valid
+    end
   end
 
   it 'should have a description of "Remote" when created with it' do
