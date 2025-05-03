@@ -28,7 +28,6 @@ Feature: Add experience required to job offer
     When I edit the job offer and change the experience to "5" years
     Then I should see "5 years" in my offers
 
-  @wip
   Scenario: US-3.6 Experience required cannot be negative
     When I create a job offer with "-1" years of required experience
     Then I should see the error "can't be negative"
