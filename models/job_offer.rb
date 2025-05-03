@@ -10,9 +10,11 @@ class JobOffer
   MINIMUM_EXPERIENCE = 0
   SALARY_CANT_BE_BLANK_MESSAGE = "can't be blank".freeze
   SALARY_CANT_BE_NEGATIVE_MESSAGE = "can't be negative".freeze
+  EXPERIENCE_CANT_BE_BLANK_MESSAGE = "can't be blank".freeze
 
   validates :title, presence: true
   validate :is_salary_valid?
+  validate :is_experience_valid?
 
   def initialize(data = {})
     @id = data[:id]
@@ -79,5 +81,12 @@ class JobOffer
     errors.add(:salary, SALARY_CANT_BE_BLANK_MESSAGE) if @salary.blank? || @salary.nil?
 
     errors.add(:salary, SALARY_CANT_BE_NEGATIVE_MESSAGE) if @salary.to_i < MINIMUM_SALARY
+  end
+
+  def is_experience_valid?
+    if @experience_required.blank? || @experience_required.nil?
+      errors.add(:experience_required,
+                 EXPERIENCE_CANT_BE_BLANK_MESSAGE)
+    end
   end
 end

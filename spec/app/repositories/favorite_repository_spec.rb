@@ -16,7 +16,7 @@ describe FavoriteRepository do
     other_user = User.new(name: 'Joe', email: 'joe@doe.com', crypted_password: 'secure_pwd')
     user_repo.save(other_user)
 
-    an_offer = JobOffer.new(title: 'a title', salary: 0, user_id: owner.id)
+    an_offer = JobOffer.new(title: 'a title', salary: 0, experience_required: 0, user_id: owner.id)
     job_offer_repo.save(an_offer)
 
     an_offer = job_offer_repo.find_by_owner(owner).first
@@ -37,7 +37,7 @@ describe FavoriteRepository do
     other_user = User.new(name: 'Joe', email: 'joe@doe.com', crypted_password: 'secure_pwd')
     user_repo.save(other_user)
 
-    an_offer = JobOffer.new(title: 'a title', salary: 0, user_id: owner.id)
+    an_offer = JobOffer.new(title: 'a title', salary: 0, experience_required: 0, user_id: owner.id)
     job_offer_repo.save(an_offer)
 
     an_offer = job_offer_repo.find_by_owner(owner).first
@@ -59,7 +59,7 @@ describe FavoriteRepository do
     other_user = User.new(name: 'Joe', email: 'joe@doe.com', crypted_password: 'secure_pwd')
     user_repo.save(other_user)
 
-    an_offer = JobOffer.new(title: 'a title', salary: 0, user_id: owner.id)
+    an_offer = JobOffer.new(title: 'a title', salary: 0, experience_required: 0, user_id: owner.id)
     job_offer_repo.save(an_offer)
     an_offer = job_offer_repo.find_by_owner(owner).first
 
@@ -80,7 +80,7 @@ describe FavoriteRepository do
     other_user = User.new(name: 'Joe', email: 'joe@doe.com', crypted_password: 'secure_pwd')
     user_repo.save(other_user)
 
-    an_offer = JobOffer.new(title: 'a title', salary: 0, user_id: owner.id)
+    an_offer = JobOffer.new(title: 'a title', salary: 0, experience_required: 0, user_id: owner.id)
     job_offer_repo.save(an_offer)
     an_offer = job_offer_repo.find_by_owner(owner).first
 
@@ -100,8 +100,8 @@ describe FavoriteRepository do
 
     other_user = User.new(name: 'Joe', email: 'joe@doe.com', crypted_password: 'secure_pwd')
     user_repo.save(other_user)
-    offers = [JobOffer.new(title: 'a title', salary: 0, user_id: owner.id),
-              JobOffer.new(title: 'another title', salary: 0, user_id: owner.id)]
+    offers = [JobOffer.new(title: 'a title', salary: 0, experience_required: 0, user_id: owner.id),
+              JobOffer.new(title: 'another title', salary: 0, experience_required: 0, user_id: owner.id)]
     offers.each do |offer|
       job_offer_repo.save(offer)
       favorite = Favorite.new(user: other_user, job_offer: offer)

@@ -35,7 +35,8 @@ Given('{int} active offers') do |offer_count|
   job_offer_repo = JobOfferRepository.new
 
   offer_count.times do
-    job_offer_repo.save JobOffer.new(title: 'a title', user_id: @user.id, salary: 0, is_active: true)
+    job_offer_repo.save JobOffer.new(title: 'a title', user_id: @user.id, salary: 0, experience_required: 0,
+                                     is_active: true)
   end
 end
 
@@ -66,7 +67,8 @@ Given('the user {string} has {int} active offers') do |user_email, active_offer_
   owner = user_repo.find_by_email user_email
 
   active_offer_count.times do
-    job_offer_repo.save JobOffer.new(title: 'a title', user_id: owner.id, salary: 0, is_active: true)
+    job_offer_repo.save JobOffer.new(title: 'a title', user_id: owner.id, salary: 0, experience_required: 0,
+                                     is_active: true)
   end
 end
 
@@ -74,7 +76,8 @@ Given('{int} inactive offers') do |inactive_offer_count|
   job_offer_repo = JobOfferRepository.new
 
   inactive_offer_count.times do
-    job_offer_repo.save JobOffer.new(title: 'a title', user_id: @user.id, salary: 0, is_active: false)
+    job_offer_repo.save JobOffer.new(title: 'a title', user_id: @user.id, salary: 0, experience_required: 0,
+                                     is_active: false)
   end
 end
 

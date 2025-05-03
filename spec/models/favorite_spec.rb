@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Favorite do
   describe 'valid' do
     it 'the user should not be blank' do
-      job_offer = JobOffer.new(title: 'a title', salary: 10, user_id: 128)
+      job_offer = JobOffer.new(title: 'a title', salary: 10, user_id: 128, experience_required: 0)
 
       check_validation(:user, "User can't be blank") do
         described_class.new(job_offer:)
@@ -25,7 +25,7 @@ describe Favorite do
                       crypted_password: 'a_secure_passWord!',
                       birthdate: Date.new(2000, 10, 8), current_date: Date.new(2021, 10, 8), id: 99)
 
-      job_offer = JobOffer.new(title: 'a title', salary: 10, user_id: 128)
+      job_offer = JobOffer.new(title: 'a title', salary: 10, user_id: 128, experience_required: 0)
       favorite = described_class.new(user:, job_offer:)
       expect(favorite).to be_valid
     end
@@ -35,7 +35,7 @@ describe Favorite do
                       crypted_password: 'a_secure_passWord!',
                       birthdate: Date.new(2000, 10, 8), current_date: Date.new(2021, 10, 8), id: 99)
 
-      job_offer = JobOffer.new(title: 'a title', salary: 10, user_id: 99)
+      job_offer = JobOffer.new(title: 'a title', salary: 10, user_id: 99, experience_required: 0)
       check_validation(:user, "User can't be the same as the job offer owner") do
         described_class.new(user:, job_offer:)
       end

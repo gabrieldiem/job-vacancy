@@ -34,7 +34,8 @@ describe UserRepository do
     offers = [JobOffer.new(
       title: 'Software Engineer',
       salary: 100_000,
-      is_active: true
+      is_active: true,
+      experience_required: 0
     )]
 
     found_user = repository.find_by_email(joe_user.email)

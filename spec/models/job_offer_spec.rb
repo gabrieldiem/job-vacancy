@@ -4,58 +4,65 @@ describe JobOffer do
   describe 'valid?' do
     it 'should be invalid when title is blank' do
       check_validation(:title, "Title can't be blank") do
-        described_class.new(location: 'a location', salary: 10)
+        described_class.new(location: 'a location', salary: 10, experience_required: 0)
       end
     end
 
     it 'should be invalid when salary is blank' do
       check_validation(:salary, "Salary can't be blank") do
-        described_class.new(title: 'a title')
+        described_class.new(title: 'a title', experience_required: 0)
       end
     end
 
     it 'should be invalid when salary is -1' do
       check_validation(:salary, "Salary can't be negative") do
-        described_class.new(title: 'a title', salary: -1)
+        described_class.new(title: 'a title', salary: -1, experience_required: 0)
       end
     end
 
     it 'should be valid when title and salary are not blank' do
-      job_offer = described_class.new(title: 'a title', salary: 10)
+      job_offer = described_class.new(title: 'a title', salary: 10, experience_required: 0)
       expect(job_offer).to be_valid
+    end
+
+    it 'should be invalid when experience is blank' do
+      check_validation(:experience_required, "Experience required can't be blank") do
+        described_class.new(title: 'a title', salary: 10)
+      end
     end
   end
 
   it 'should have a description of "Remote" when created with it' do
-    job_offer = described_class.new(title: 'a title', description: 'Remote', salary: 0)
+    job_offer = described_class.new(title: 'a title', description: 'Remote', experience_required: 0, salary: 0)
     expect(job_offer.description).to eq 'Remote'
   end
 
   it 'should have a location of "Korea" when created with it' do
-    job_offer = described_class.new(title: 'a title', location: 'Korea', salary: 0)
+    job_offer = described_class.new(title: 'a title', location: 'Korea', experience_required: 0, salary: 0)
     expect(job_offer.location).to eq 'Korea'
   end
 
   it 'should have a salary of 10000 when created with it' do
-    job_offer = described_class.new(title: 'a title', salary: 10_000)
+    job_offer = described_class.new(title: 'a title', salary: 10_000, experience_required: 0)
     expect(job_offer.salary).to eq 10_000
     expect(job_offer.is_salary_specified?).to be true
   end
 
   it 'should have a salary of 200 when created with it' do
-    job_offer = described_class.new(title: 'a title', salary: 200)
+    job_offer = described_class.new(title: 'a title', salary: 200, experience_required: 0)
     expect(job_offer.salary).to eq 200
   end
 
   it 'should have a salary of 300, description of "Remote" and location of "Korea" when created with it' do
-    job_offer = described_class.new(title: 'a title', salary: 300, description: 'Remote', location: 'Korea')
+    job_offer = described_class.new(title: 'a title', salary: 300, experience_required: 0, description: 'Remote',
+                                    location: 'Korea')
     expect(job_offer.salary).to eq 300
     expect(job_offer.description).to eq 'Remote'
     expect(job_offer.location).to eq 'Korea'
   end
 
   it 'should have a "Not specified" salary when created with 0 salary' do
-    job_offer = described_class.new(title: 'a title', salary: 0)
+    job_offer = described_class.new(title: 'a title', salary: 0, experience_required: 0)
     expect(job_offer.is_salary_specified?).to be false
   end
 
@@ -73,7 +80,7 @@ describe JobOffer do
   end
 
   it 'A JobOffer created as inactive is inactive' do
-    offer = described_class.new(title: 'a title', salary: 0, is_active: false)
+    offer = described_class.new(title: 'a title', salary: 0, experience_required: 0, is_active: false)
     expect(offer.is_active?).to be false
   end
 

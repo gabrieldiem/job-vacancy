@@ -23,28 +23,28 @@ describe JobOfferRepository do
   end
 
   it 'A JobOffer with title "Dev", description "Remote" is saved and retrieved correctly' do
-    job_offer = create_job_offer('Dev', 0, { description: 'Remote' })
+    job_offer = create_job_offer('Dev', 0, { description: 'Remote', experience_required: 10 })
     found_offer = save_and_retrieve_by_id(job_offer)
     expect(found_offer.title).to eq 'Dev'
     expect(found_offer.description).to eq 'Remote'
   end
 
   it 'A JobOffer with title "Dev" and location "USA" is saved and retrieved correctly' do
-    job_offer = create_job_offer('Dev', 0, { location: 'USA' })
+    job_offer = create_job_offer('Dev', 0, { location: 'USA', experience_required: 10 })
     found_offer = save_and_retrieve_by_id(job_offer)
     expect(found_offer.title).to eq 'Dev'
     expect(found_offer.location).to eq 'USA'
   end
 
   it 'A JobOffer with title "Dev" and is not active is saved and retrieved correctly' do
-    job_offer = create_job_offer('Dev', 0, { is_active: false })
+    job_offer = create_job_offer('Dev', 0, { is_active: false, experience_required: 10 })
     found_offer = save_and_retrieve_by_id(job_offer)
     expect(found_offer.title).to eq 'Dev'
     expect(found_offer.is_active).to be false
   end
 
   it 'A JobOffer saved and retreived should have a salary of 10000 when created with it' do
-    job_offer = create_job_offer('title', 10_000)
+    job_offer = create_job_offer('title', 10_000, { experience_required: 10 })
 
     found_offer = save_and_retrieve_by_id(job_offer)
     expect(found_offer.salary).to eq 10_000
@@ -52,7 +52,7 @@ describe JobOfferRepository do
 
   describe 'deactive_old_offers' do
     def create_job_offer_with_update_date(title, salary, update_on)
-      JobOffer.new(title:, updated_on: update_on, user_id: owner.id, salary:, is_active: true)
+      JobOffer.new(title:, updated_on: update_on, user_id: owner.id, salary:, experience_required: 0, is_active: true)
     end
 
     let!(:today_offer) do

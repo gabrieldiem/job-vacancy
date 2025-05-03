@@ -5,14 +5,15 @@ describe OnDemandSubscription do
 
   it 'Cost of 1 active offers is 10.0' do
     subscription = described_class.new
-    expect(subscription.calculate_cost([JobOffer.new(title: 'a title', salary: 0, is_active: true)])).to eq 10.0
+    expect(subscription.calculate_cost([JobOffer.new(title: 'a title', salary: 0, experience_required: 0,
+                                                     is_active: true)])).to eq 10.0
   end
 
   it 'Cost of 2 active offers is 20.0' do
     offers = []
 
     2.times do
-      offers.push JobOffer.new(title: 'a title', salary: 0, is_active: true)
+      offers.push JobOffer.new(title: 'a title', salary: 0, experience_required: 0, is_active: true)
     end
 
     subscription = described_class.new
@@ -23,7 +24,7 @@ describe OnDemandSubscription do
     offers = []
 
     2.times do
-      offers.push JobOffer.new(title: 'a title', salary: 0, is_active: false)
+      offers.push JobOffer.new(title: 'a title', salary: 0, experience_required: 0, is_active: false)
     end
 
     subscription = described_class.new

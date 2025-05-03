@@ -7,7 +7,8 @@ describe NonProfitOrganizationSubscription do
 
   it 'Cost of 1 active offers is 0.0' do
     subscription = described_class.new org_email
-    expect(subscription.calculate_cost([JobOffer.new(title: 'a title', salary: 0, is_active: true)])).to eq 0.0
+    expect(subscription.calculate_cost([JobOffer.new(title: 'a title', salary: 0, is_active: true,
+                                                     experience_required: 0)])).to eq 0.0
   end
 
   it 'Not @org email is invalid for NonProfitOrganizationSubscription' do

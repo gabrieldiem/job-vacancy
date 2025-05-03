@@ -95,7 +95,7 @@ describe User do
   end
 
   it 'User with OnDemandSubscription and 1 active offer has a bill of 10.0' do
-    offers = [JobOffer.new(title: 'a title', salary: 0, is_active: true)]
+    offers = [JobOffer.new(title: 'a title', salary: 0, experience_required: 0, is_active: true)]
 
     expect(user.billed_amount(offers)).to eq 10.0
   end
@@ -103,7 +103,7 @@ describe User do
   it 'User with OnDemandSubscription and 2 active offer has a bill of 20.0' do
     offers = []
     2.times do
-      offers.push JobOffer.new(title: 'a title', salary: 0, is_active: true)
+      offers.push JobOffer.new(title: 'a title', salary: 0, experience_required: 0, is_active: true)
     end
 
     expect(user.billed_amount(offers)).to eq 20.0
@@ -116,7 +116,7 @@ describe User do
                                subscription_type: non_profit_subscription)
     offers = []
     2.times do
-      offers.push JobOffer.new(title: 'a title', salary: 0, is_active: true)
+      offers.push JobOffer.new(title: 'a title', salary: 0, experience_required: 0, is_active: true)
     end
 
     expect(user.billed_amount(offers)).to eq 0.0
@@ -129,10 +129,10 @@ describe User do
                                subscription_type: non_profit_subscription)
     offers = []
     2.times do
-      offers.push JobOffer.new(title: 'a title', salary: 0, is_active: true)
+      offers.push JobOffer.new(title: 'a title', salary: 0, experience_required: 0, is_active: true)
     end
 
-    offers.push JobOffer.new(title: 'a title', salary: 0, is_active: false)
+    offers.push JobOffer.new(title: 'a title', salary: 0, experience_required: 0, is_active: false)
 
     expect(user.billed_amount(offers)).to eq 0.0
   end
@@ -144,11 +144,11 @@ describe User do
                                subscription_type: non_profit_subscription)
     user_offers = []
     7.times do
-      user_offers.push JobOffer.new(title: 'a title', salary: 0, is_active: true)
+      user_offers.push JobOffer.new(title: 'a title', salary: 0, experience_required: 0, is_active: true)
     end
     repo = instance_double('offer_repo', find_by_owner: user_offers)
 
-    target = JobOffer.new(title: 'a title', salary: 0, is_active: false)
+    target = JobOffer.new(title: 'a title', salary: 0, experience_required: 0, is_active: false)
     target.owner = user
 
     offer_counter = OfferCounter.new(repo)

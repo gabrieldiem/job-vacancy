@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe JobApplication do
-  let(:job_offer) { JobOffer.new(title: 'a title', salary: 0) }
+  let(:job_offer) { JobOffer.new(title: 'a title', salary: 0, experience_required: 0) }
 
   describe 'valid?' do
     it 'should be invalid when email is blank' do
