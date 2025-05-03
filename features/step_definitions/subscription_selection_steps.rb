@@ -58,10 +58,12 @@ Given('add {int} active job offers') do |offer_count|
   job_offer_repo = JobOfferRepository.new
 
   offer_count.times do
-    job_offer_repo.save JobOffer.new(title: 'a title', user_id: @user.id, salary: 0, is_active: true)
+    job_offer_repo.save JobOffer.new(title: 'a title', user_id: @user.id, salary: 0, is_active: true,
+                                     experience_required: 0)
   end
 
-  job_offer_repo.save JobOffer.new(title: 'a title', user_id: @user.id, salary: 0, is_active: false)
+  job_offer_repo.save JobOffer.new(title: 'a title', user_id: @user.id, salary: 0, is_active: false,
+                                   experience_required: 0)
 end
 
 When('I press the button to activate the 8th active job offer') do

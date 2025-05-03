@@ -63,6 +63,15 @@ describe JobOffer do
     expect(described_class.unspecified_salary_number).to be 0
   end
 
+  it 'should have "No experience required" when experience required is 0' do
+    job_offer = described_class.new(title: 'a title', experience_required: 0, salary: 0)
+    expect(job_offer.is_experience_specified?).to be false
+  end
+
+  it 'The experience required to declare it as "No experience required" is 0' do
+    expect(described_class.no_experience_required).to be 0
+  end
+
   it 'A JobOffer created as inactive is inactive' do
     offer = described_class.new(title: 'a title', salary: 0, is_active: false)
     expect(offer.is_active?).to be false

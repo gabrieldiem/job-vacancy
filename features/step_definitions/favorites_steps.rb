@@ -8,7 +8,8 @@ Given('a job offer exists created by a job offerer') do
                            current_date: Date.new(2025, 10, 1))
   @user_repository.save(@user_offerer)
 
-  @job_offer = JobOffer.new(title: 'Software Engineer', user_id: @user_offerer.id, salary: 0, is_active: true)
+  @job_offer = JobOffer.new(title: 'Software Engineer', user_id: @user_offerer.id, salary: 0, is_active: true,
+                            experience_required: 0)
   @job_offer_repository.save(@job_offer)
 end
 
@@ -24,7 +25,8 @@ Given('I am logged in as a registered user') do
 end
 
 Given('I have active job offers') do
-  @job_offer = JobOffer.new(title: 'Frontend Developer', user_id: @user_applicant.id, salary: 0, is_active: true)
+  @job_offer = JobOffer.new(title: 'Frontend Developer', user_id: @user_applicant.id, salary: 0, is_active: true,
+                            experience_required: 5)
   @job_offer_repository.save(@job_offer)
 end
 

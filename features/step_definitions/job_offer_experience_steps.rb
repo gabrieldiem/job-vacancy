@@ -11,12 +11,12 @@ When('I create and activate a job offer with {string} years of required experien
   click_button('Activate')
 end
 
-Then('I should see {string} required experience in the job offers list') do |experience|
+Then('I should see {string} in required experience in the job offers list') do |experience|
   visit '/job_offers/latest'
   page.should have_content(experience)
 end
 
-Then('I should see {string} in my offers as well') do |experience|
+Then('I should see {string} in my offers') do |experience|
   visit '/job_offers/my'
   page.should have_content(experience)
 end

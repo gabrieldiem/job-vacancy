@@ -53,6 +53,14 @@ class JobOffer
     @salary > MINIMUM_SALARY
   end
 
+  def is_experience_specified?
+    @experience_required > MINIMUM_EXPERIENCE
+  end
+
+  def self.no_experience_required
+    MINIMUM_EXPERIENCE
+  end
+
   def self.unspecified_salary_number
     MINIMUM_SALARY
   end

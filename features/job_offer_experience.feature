@@ -5,19 +5,18 @@ Feature: Add experience required to job offer
 
   Scenario: US-3.1 Successful job offer creation with experience required
     When I create and activate a job offer with "2" years of required experience
-    Then I should see "2 years" required experience in the job offers list
-    And I should see "2 years" in my offers as well
+    Then I should see "2 years" in required experience in the job offers list
+    And I should see "2 years" in my offers
 
   Scenario: US-3.2 Successful job offer creation with 1 year of required experience
     When I create and activate a job offer with "1" years of required experience
-    Then I should see "1 year" required experience in the job offers list
-    And I should see "1 year" in my offers as well
+    Then I should see "1 year" in required experience in the job offers list
+    And I should see "1 year" in my offers
 
-  @wip
   Scenario: US-3.3 Job offer with 0 years of required experience shows no required experience
     When I create and activate a job offer with "0" years of required experience
-    Then I should see "No experience required" in the job offers list
-    And I should see "No experience required" in my offers as well
+    Then I should see "No experience required" in required experience in the job offers list
+    And I should see "No experience required" in my offers
 
   @wip
   Scenario: US-3.4 Experience required is mandatory

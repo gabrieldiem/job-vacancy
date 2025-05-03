@@ -1,8 +1,8 @@
 # Helper methods defined here can be accessed in any controller or view in the application
 
 NOT_SPECIFIED_SALARY_MESSAGE = 'Not specified'.freeze
-NO_JOB_EXPERIENCE_MESSAGE = 'No Experience Required'.freeze
-EXPERIENCE_FORMAT = ->(years) { years == 1 ? 'year' : 'years' }
+NO_JOB_EXPERIENCE_MESSAGE = 'No experience required'.freeze
+EXPERIENCE_FORMAT = ->(offer) { "#{offer.experience_required} #{offer.experience_required == 1 ? 'year' : 'years'}" }
 
 JobVacancy::App.helpers do
   def job_offer_params
@@ -14,7 +14,7 @@ JobVacancy::App.helpers do
   end
 
   def print_experience(offer)
-    "#{offer.experience_required} #{EXPERIENCE_FORMAT.call(offer.experience_required)}"
+    offer.is_experience_specified? ? EXPERIENCE_FORMAT.call(offer) : NO_JOB_EXPERIENCE_MESSAGE
   end
 
   def is_favorite?(offer)
