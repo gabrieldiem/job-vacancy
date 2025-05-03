@@ -1,5 +1,5 @@
 class JobOfferForm
-  attr_accessor :id, :title, :location, :description, :salary
+  attr_accessor :id, :title, :location, :description, :salary, :experience_required
 
   def self.from(a_job_offer)
     form = JobOfferForm.new
@@ -7,6 +7,7 @@ class JobOfferForm
     form.title = a_job_offer.title
     form.location = a_job_offer.location
     form.description = a_job_offer.description
+    form.experience_required = a_job_offer.experience_required
     form.salary = a_job_offer.salary
     form
   end

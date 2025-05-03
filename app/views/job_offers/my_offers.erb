@@ -4,6 +4,7 @@
 		<th>Title</th>
 		<th>Location</th>
     <th>Description</th>
+	<th>Experience Required</th>
     <th>Salary</th>
     <th>Favorites</th>
     <th>Is active</th>
@@ -21,6 +22,10 @@
 		<td>
 			<%= offer.description %>
 		</td>
+		<td>
+			<%= offer.experience_required %>
+		</td>
+
     <td>
       <%= print_salary(offer) %>
     </td>

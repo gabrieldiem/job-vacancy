@@ -7,6 +7,7 @@ class JobOffer
                 :updated_on, :created_on, :experience_required
 
   MINIMUM_SALARY = 0
+  MINIMUM_EXPERIENCE = 0
   SALARY_CANT_BE_BLANK_MESSAGE = "can't be blank".freeze
   SALARY_CANT_BE_NEGATIVE_MESSAGE = "can't be negative".freeze
 
@@ -54,6 +55,10 @@ class JobOffer
 
   def self.unspecified_salary_number
     MINIMUM_SALARY
+  end
+
+  def self.unspecified_experience_number
+    MINIMUM_EXPERIENCE
   end
 
   def is_active?

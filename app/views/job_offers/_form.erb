@@ -7,6 +7,13 @@
   <%= f.label :description %>
   <%= f.text_area :description, :class => "input-block-level" %>
 	<%= errors_for(@errors, :description) %>
+
+  <%= f.label :experience_required %>
+  <span class="help-block">Input '<%= JobOffer::unspecified_experience_number %>' (without the ticks)
+    for no experience required</span>
+  <%= f.number_field :experience_required, :class => "input-block-level" %>
+  <%= errors_for(@errors, :experience_required) %>
+
   <%= f.label :salary %>
   <span class="help-block">Input '<%= JobOffer::unspecified_salary_number %>' (without the ticks)
     for an unspecified salary</span>

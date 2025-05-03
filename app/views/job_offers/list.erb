@@ -17,6 +17,7 @@
 		<th>Title</th>
 		<th>Location</th>
     <th>Description</th>
+	<th>Experience Required</th>
     <th>Salary</th>
 		<th>Actions</th>
 		<% unless session[:current_user].nil? %>
@@ -34,6 +35,9 @@
 		</td>
 		<td>
 			<%= offer.description %>
+		</td>
+		<td>
+			<%= offer.experience_required %>
 		</td>
     <td>
       <%= print_salary(offer) %>
