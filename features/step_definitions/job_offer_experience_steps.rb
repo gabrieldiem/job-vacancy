@@ -26,11 +26,16 @@ Then('I should see {string} in the job offers list') do |_string|
 end
 
 When('I create a job offer without filling the required experience') do
-  pending # Write code here that turns the phrase above into concrete actions
+  visit '/job_offers/new'
+  fill_in('job_offer_form[title]', with: 'Software Engineer')
+  fill_in('job_offer_form[location]', with: 'Remote')
+  fill_in('job_offer_form[description]', with: 'Developing software')
+  fill_in('job_offer_form[salary]', with: '50000')
+  click_button('Create')
 end
 
-Then('I should see the error {string}') do |_string|
-  pending # Write code here that turns the phrase above into concrete actions
+Then('I should see the error {string}') do |string|
+  page.should have_content(string)
 end
 
 Given('an existing job offer with {int} years of experience required') do |_int|

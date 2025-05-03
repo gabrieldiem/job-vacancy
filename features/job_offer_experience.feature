@@ -18,10 +18,10 @@ Feature: Add experience required to job offer
     Then I should see "No experience required" in required experience in the job offers list
     And I should see "No experience required" in my offers
 
-  @wip
+
   Scenario: US-3.4 Experience required is mandatory
     When I create a job offer without filling the required experience
-    Then I should see the error "can’t be blank"
+    Then I should see the error "can't be blank"
 
   @wip
   Scenario: US-3.5 Experience required can be edited
@@ -32,7 +32,7 @@ Feature: Add experience required to job offer
   @wip
   Scenario: US-3.6 Experience required cannot be negative
     When I create a job offer with "-1" years of required experience
-    Then I should see the error "can’t be negative"
+    Then I should see the error "can't be negative"
 
   @wip
   Scenario: US-3.7 Experience required cannot be text
