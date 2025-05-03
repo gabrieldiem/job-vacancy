@@ -4,7 +4,7 @@ When('I create a job offer with {string} years of required experience') do |expe
   fill_in('job_offer_form[location]', with: 'Remote')
   fill_in('job_offer_form[description]', with: 'Developing software')
   fill_in('job_offer_form[salary]', with: '50000')
-  fill_in('job_offer_form[required_experience]', with: experience)
+  fill_in('job_offer_form[experience_required]', with: experience)
   click_button('Create')
 end
 

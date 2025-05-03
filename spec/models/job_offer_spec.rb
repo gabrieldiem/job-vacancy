@@ -67,4 +67,9 @@ describe JobOffer do
     offer = described_class.new(title: 'a title', salary: 0, is_active: false)
     expect(offer.is_active?).to be false
   end
+
+  it 'should have a experience required of 1 when created with it' do
+    job_offer = described_class.new(title: 'a title', salary: 200, experience_required: 1)
+    expect(job_offer.experience_required).to eq 1
+  end
 end

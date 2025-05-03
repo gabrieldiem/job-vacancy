@@ -4,7 +4,7 @@ class JobOffer
 
   attr_accessor :id, :user, :user_id, :title,
                 :location, :description, :salary, :is_active,
-                :updated_on, :created_on
+                :updated_on, :created_on, :experience_required
 
   MINIMUM_SALARY = 0
   SALARY_CANT_BE_BLANK_MESSAGE = "can't be blank".freeze
@@ -23,6 +23,7 @@ class JobOffer
     @created_on = data[:created_on]
     @user_id = data[:user_id]
     @salary = data[:salary]
+    @experience_required = data[:experience_required]
     validate!
   end
 
