@@ -46,12 +46,15 @@
 			<%= link_to 'Apply', url_for(:job_offers, :apply, :offer_id => offer.id), :class => "btn btn-primary" %>
 		</td>
 		<% unless session[:current_user].nil? %>
-  		<td>
-
-				<%= link_to '❤', is_same_owner?(offer) ? url_for("#") : url_for(:job_offers, :mark_as_favorite, :offer_id => offer.id),
-										:class => "btn #{is_favorite?(offer) ? " btn-danger" : ""} #{is_same_owner?(offer) ? "disabled" : ""}", :alt => "Favorite", :name => "Favorite", :style => "font-size: 30px;" %>
-			</td>
-		<% end %>
+      <td>
+        <%= link_to '❤',
+                    is_same_owner?(offer) ? "#" : url_for(:job_offers, :mark_as_favorite, :offer_id => offer.id),
+                    class: "btn #{is_favorite?(offer) ? ' btn-danger' : ''}#{is_same_owner?(offer) ? ' disabled' : ''}",
+                    alt: "Favorite",
+                    name: "Favorite",
+                    style: "font-size: 30px;#{' pointer-events: none; user-select: none; opacity: 0.6;' if is_same_owner?(offer)}" %>
+      </td>
+  <% end %>
 	</tr>
 
   <% end %>
