@@ -40,6 +40,7 @@ class JobOfferRepository < BaseRepository
       description: offer.description,
       is_active: offer.is_active,
       user_id: offer.owner&.id || offer.user_id,
+      experience_required: offer.experience_required,
       salary: offer.salary
     }
   end

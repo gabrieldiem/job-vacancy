@@ -21,6 +21,7 @@ return unless offer_repository.all.count.zero?
 ruby_offer = JobOffer.new(title: 'Ruby Dev',
                           location: 'Baires, Argentina',
                           description: 'Remote',
+                          experience_required: 0,
                           salary: 0,
                           is_active: true)
 ruby_offer.owner = test_user
@@ -29,6 +30,7 @@ offer_repository.save ruby_offer
 node_offer = JobOffer.new(title: 'Node Dev',
                           location: 'Rio, Brazil',
                           description: 'Remote',
+                          experience_required: 5,
                           salary: 10_000,
                           is_active: true)
 node_offer.owner = test_user

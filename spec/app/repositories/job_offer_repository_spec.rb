@@ -80,5 +80,11 @@ describe JobOfferRepository do
       not_updated_offer = repository.find(today_offer.id)
       expect(not_updated_offer.is_active).to eq true
     end
+
+    it 'A JobOffer with experience required 10 years is saved and retrieved correctly' do
+      job_offer = create_job_offer('Dev', 0, { experience_required: 10 })
+      found_offer = save_and_retrieve_by_id(job_offer)
+      expect(found_offer.experience_required).to eq 10
+    end
   end
 end

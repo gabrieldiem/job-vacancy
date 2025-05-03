@@ -8,6 +8,7 @@ When('I create a new offer with title {string}, location {string}, description {
   fill_in('job_offer_form[title]', with: title)
   fill_in('job_offer_form[location]', with: location)
   fill_in('job_offer_form[description]', with: description)
+  fill_in('job_offer_form[experience_required]', with: 0)
   fill_in('job_offer_form[salary]', with: salary)
   click_button('Create')
 end
