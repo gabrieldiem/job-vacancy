@@ -41,6 +41,12 @@ describe JobOffer do
       job_offer = described_class.new(title: 'a title', salary: 10, experience_required: 5)
       expect(job_offer).to be_valid
     end
+
+    it 'should be invalid when experience_required is not numeric' do
+      check_validation(:experience_required, 'Experience required Please enter the years as a number') do
+        described_class.new(title: 'a title', salary: 10, experience_required: 'two years')
+      end
+    end
   end
 
   it 'should have a description of "Remote" when created with it' do

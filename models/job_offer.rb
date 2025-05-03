@@ -10,6 +10,7 @@ class JobOffer
   MINIMUM_EXPERIENCE = 0
   SALARY_CANT_BE_BLANK_MESSAGE = "can't be blank".freeze
   CANT_BE_NEGATIVE_MESSAGE = "can't be negative".freeze
+  YEARS_MUST_BE_INTEGER_MESSAGE = 'Please enter the years as a number'.freeze
   EXPERIENCE_CANT_BE_BLANK_MESSAGE = "can't be blank".freeze
 
   validates :title, presence: true
@@ -85,10 +86,11 @@ class JobOffer
 
   def is_experience_valid?
     if @experience_required.blank? || @experience_required.nil?
-      errors.add(:experience_required,
-                 EXPERIENCE_CANT_BE_BLANK_MESSAGE)
+      errors.add(:experience_required, EXPERIENCE_CANT_BE_BLANK_MESSAGE)
+    elsif !@experience_required.to_s.match?(/\A[+-]?\d+\z/)
+      errors.add(:experience_required, YEARS_MUST_BE_INTEGER_MESSAGE)
+    elsif @experience_required.to_i < MINIMUM_EXPERIENCE
+      errors.add(:experience_required, CANT_BE_NEGATIVE_MESSAGE)
     end
-
-    errors.add(:experience_required, CANT_BE_NEGATIVE_MESSAGE) if @experience_required.to_i < MINIMUM_EXPERIENCE
   end
 end
