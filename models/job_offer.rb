@@ -8,10 +8,12 @@ class JobOffer
 
   MINIMUM_SALARY = 0
   MINIMUM_EXPERIENCE = 0
+  MAXIMUN_EXPERIENCE = 50
   SALARY_CANT_BE_BLANK_MESSAGE = "can't be blank".freeze
   CANT_BE_NEGATIVE_MESSAGE = "can't be negative".freeze
   YEARS_MUST_BE_INTEGER_MESSAGE = 'Please enter the years as a number'.freeze
   EXPERIENCE_CANT_BE_BLANK_MESSAGE = "can't be blank".freeze
+  CANT_BE_GREATER_THAN_50_MESSAGE = 'must be under 50 years'.freeze
 
   validates :title, presence: true
   validate :is_salary_valid?
@@ -91,6 +93,8 @@ class JobOffer
       errors.add(:experience_required, YEARS_MUST_BE_INTEGER_MESSAGE)
     elsif @experience_required.to_i < MINIMUM_EXPERIENCE
       errors.add(:experience_required, CANT_BE_NEGATIVE_MESSAGE)
+    elsif @experience_required.to_i > MAXIMUN_EXPERIENCE
+      errors.add(:experience_required, CANT_BE_GREATER_THAN_50_MESSAGE)
     end
   end
 end

@@ -35,3 +35,8 @@ Feature: Add experience required to job offer
   Scenario: US-3.7 Experience required cannot be text
     When I create a job offer with "five years" years of required experience
     Then I should see the error message "Please enter the years as a number"
+
+  @wip
+  Scenario: US-3.8 Experience required greater than 50 years
+    When I create a job offer with "51" years of required experience
+    Then I should see the error message "must be under 50 years"

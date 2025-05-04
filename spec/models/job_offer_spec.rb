@@ -47,6 +47,12 @@ describe JobOffer do
         described_class.new(title: 'a title', salary: 10, experience_required: 'two years')
       end
     end
+
+    it 'should be invalid when experience_required is numeric greater than 50' do
+      check_validation(:experience_required, 'Experience required must be under 50 years') do
+        described_class.new(title: 'a title', salary: 10, experience_required: 51)
+      end
+    end
   end
 
   it 'should have a description of "Remote" when created with it' do
